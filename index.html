@@ -3,55 +3,74 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SOS Digital — Local Growth Systems</title>
+<title>SOS Digital — Lead Gen Quantum Systems</title>
 <meta name="description" content="SOS Digital aide les contracteurs, entreprises et experts HVAC de la Rive-Sud à générer plus d'appels qualifiés et de chantiers réservés." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-<style>
 
+<!-- FAVICON + MOBILE ICONS -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#031514">
+
+<!-- SMS / SOCIAL LINK PREVIEW -->
+<meta property="og:title" content="SOS Digital — Dominez votre Marché Local">
+<meta property="og:description" content="Plus d'appels qualifiés, plus de visibilité locale et plus de chantiers réservés pour les contracteurs de la Rive-Sud.">
+<meta property="og:image" content="https://www.sosdigital.ca/og-image.png">
+<meta property="og:url" content="https://www.sosdigital.ca/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SOS Digital — Dominez votre Marché Local">
+<meta name="twitter:description" content="Lead generation local pour contracteurs, HVAC et services résidentiels.">
+<meta name="twitter:image" content="https://www.sosdigital.ca/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@500;700;800;900&display=swap" rel="stylesheet">
+
+<style>
 /* =========================================================
-   SOS DIGITAL — FRESH PREMIUM BUILD
-   Concept: Bright AI Growth Studio + Interactive Chatbot
-   Focus: trust, clarity, action, modern luxury, conversion
+   SOS DIGITAL — MATRIX QUANTUM BUILD
+   Full HTML/CSS/JS single-file landing page
+   Logo file expected in root: /sos-logo.png
 ========================================================= */
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #f8f5ef;
-  --paper: #fffdf8;
-  --ink: #111111;
-  --ink2: #24211e;
-  --muted: #716b63;
-  --soft: #a59c91;
-  --line: rgba(17,17,17,.12);
-  --line2: rgba(17,17,17,.20);
-  --brand: #0d5c63;
-  --brand2: #07383d;
-  --mint: #dff6e8;
-  --sand: #efe1cc;
-  --orange: #e87b45;
-  --orange2: #bd4d2c;
-  --yellow: #f5c96b;
-  --white: #fff;
-  --shadow: 0 30px 80px rgba(28, 24, 20, .12);
-  --shadow2: 0 16px 40px rgba(28, 24, 20, .10);
-  --radius: 28px;
+  --bg: #020806;
+  --bg2: #06110f;
+  --panel: rgba(4, 18, 16, .74);
+  --panel2: rgba(7, 35, 31, .68);
+  --glass: rgba(255,255,255,.055);
+  --line: rgba(45,255,225,.18);
+  --line2: rgba(45,255,225,.34);
+  --text: #effffb;
+  --muted: #93b7af;
+  --soft: #5e8580;
+  --cyan: #34ffe5;
+  --cyan2: #00bfae;
+  --green: #50ff8d;
+  --matrix: #00ff66;
+  --amber: #ffcc7a;
+  --red: #ff4c61;
+  --dark: #020302;
+  --shadow: 0 30px 100px rgba(0, 255, 210, .12);
+  --shadow2: 0 20px 60px rgba(0,0,0,.55);
   --font: 'Inter', sans-serif;
-  --serif: 'Playfair Display', serif;
+  --display: 'Orbitron', sans-serif;
 }
 
 html { scroll-behavior: smooth; }
 
 body {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 14% 0%, rgba(13,92,99,.16), transparent 30%),
-    radial-gradient(circle at 96% 8%, rgba(232,123,69,.17), transparent 28%),
-    radial-gradient(circle at 50% 100%, rgba(245,201,107,.18), transparent 32%),
-    var(--bg);
-  color: var(--ink);
   font-family: var(--font);
+  background:
+    radial-gradient(circle at 14% 0%, rgba(52,255,229,.20), transparent 32%),
+    radial-gradient(circle at 90% 8%, rgba(80,255,141,.13), transparent 26%),
+    radial-gradient(circle at 50% 100%, rgba(0,191,174,.18), transparent 34%),
+    linear-gradient(180deg, #020806 0%, #010403 52%, #03110e 100%);
+  color: var(--text);
   overflow-x: hidden;
 }
 
@@ -59,44 +78,79 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -2;
   pointer-events: none;
+  z-index: -3;
   background-image:
-    linear-gradient(rgba(17,17,17,.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(17,17,17,.035) 1px, transparent 1px);
-  background-size: 76px 76px;
-  mask-image: radial-gradient(circle at 50% 10%, black 10%, transparent 70%);
+    linear-gradient(rgba(52,255,229,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(52,255,229,.045) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: radial-gradient(circle at 50% 20%, black 8%, transparent 76%);
 }
 
-.blob {
+body::after {
+  content: "";
   position: fixed;
-  border-radius: 999px;
-  filter: blur(45px);
-  opacity: .32;
+  inset: 0;
   pointer-events: none;
-  z-index: -1;
-  animation: floatBlob 14s ease-in-out infinite alternate;
+  z-index: -2;
+  background:
+    repeating-linear-gradient(180deg, rgba(255,255,255,.025) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, transparent, rgba(0,0,0,.34));
+  mix-blend-mode: screen;
+  opacity: .32;
 }
-.blob-a { width: 340px; height: 340px; background: var(--brand); top: 10%; left: -130px; }
-.blob-b { width: 280px; height: 280px; background: var(--orange); top: 54%; right: -110px; animation-delay: -4s; }
-.blob-c { width: 260px; height: 260px; background: var(--yellow); bottom: -100px; left: 42%; animation-delay: -8s; }
-@keyframes floatBlob { to { transform: translate(70px, 48px) scale(1.08); } }
-
-.en { display: none !important; }
-body.lang-en .fr { display: none !important; }
-body.lang-en .en { display: revert !important; }
 
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 button, input, textarea { font: inherit; }
 
-.shell { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+.en { display: none !important; }
+body.lang-en .fr { display: none !important; }
+body.lang-en .en { display: revert !important; }
 
-/* =========================================================
-   UI SYSTEM
-========================================================= */
+.shell { width: min(1200px, calc(100% - 32px)); margin: 0 auto; }
 
+/* MATRIX RAIN */
+.matrix-rain {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+  opacity: .26;
+}
+.matrix-rain span {
+  position: absolute;
+  top: -20vh;
+  color: var(--matrix);
+  font-family: var(--display);
+  font-size: 13px;
+  letter-spacing: 6px;
+  writing-mode: vertical-rl;
+  text-shadow: 0 0 10px rgba(0,255,102,.85);
+  animation: rain linear infinite;
+}
+@keyframes rain { to { transform: translateY(140vh); } }
+
+.quantum-orb {
+  position: fixed;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  filter: blur(52px);
+  opacity: .25;
+  pointer-events: none;
+  z-index: -2;
+  animation: orbDrift 12s ease-in-out infinite alternate;
+}
+.orb-a { background: var(--cyan); top: 12%; left: -160px; }
+.orb-b { background: var(--green); bottom: 8%; right: -160px; animation-delay: -4s; }
+.orb-c { background: var(--cyan2); top: 48%; right: 30%; width: 260px; height: 260px; animation-delay: -8s; }
+@keyframes orbDrift { to { transform: translate(72px, 45px) scale(1.08); } }
+
+/* BUTTONS */
 .btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -106,141 +160,140 @@ button, input, textarea { font: inherit; }
   border-radius: 999px;
   border: 1px solid transparent;
   cursor: pointer;
-  font-weight: 900;
   font-size: 14px;
-  transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+  font-weight: 900;
+  overflow: hidden;
+  transition: transform .25s, box-shadow .25s, border-color .25s, background .25s;
 }
-.btn:hover { transform: translateY(-3px); }
+.btn:hover { transform: translateY(-4px); }
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.28), transparent);
+  transform: translateX(-120%);
+  transition: transform .65s;
+}
+.btn:hover::before { transform: translateX(120%); }
 .btn-primary {
-  background: linear-gradient(135deg, var(--brand), var(--brand2));
-  color: white;
-  box-shadow: 0 18px 42px rgba(13,92,99,.25);
+  color: #001311;
+  background: linear-gradient(135deg, var(--cyan), var(--green));
+  box-shadow: 0 18px 55px rgba(52,255,229,.28);
 }
-.btn-primary:hover { box-shadow: 0 24px 64px rgba(13,92,99,.36); }
-.btn-accent {
-  background: linear-gradient(135deg, var(--orange), var(--orange2));
-  color: white;
-  box-shadow: 0 18px 42px rgba(232,123,69,.23);
-}
-.btn-accent:hover { box-shadow: 0 24px 64px rgba(232,123,69,.36); }
+.btn-primary:hover { box-shadow: 0 24px 75px rgba(52,255,229,.46); }
 .btn-ghost {
-  background: rgba(255,255,255,.62);
+  color: var(--text);
+  background: rgba(255,255,255,.055);
   border-color: var(--line);
-  color: var(--ink);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
 }
-.btn-ghost:hover { background: white; box-shadow: var(--shadow2); }
+.btn-ghost:hover { border-color: var(--line2); box-shadow: 0 20px 60px rgba(52,255,229,.14); }
+.btn-alert {
+  color: #080302;
+  background: linear-gradient(135deg, var(--amber), #ff8f4d);
+  box-shadow: 0 18px 55px rgba(255,204,122,.18);
+}
 
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   width: fit-content;
-  padding: 8px 12px;
+  padding: 8px 13px;
   border-radius: 999px;
-  background: rgba(13,92,99,.08);
-  color: var(--brand2);
-  border: 1px solid rgba(13,92,99,.15);
-  font-weight: 900;
+  background: rgba(52,255,229,.08);
+  color: var(--cyan);
+  border: 1px solid var(--line);
   font-size: 11px;
-  letter-spacing: 1.2px;
+  font-weight: 900;
+  letter-spacing: 1.6px;
   text-transform: uppercase;
+  text-shadow: 0 0 18px rgba(52,255,229,.35);
 }
 .eyebrow::before {
   content: "";
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--orange);
-  box-shadow: 0 0 0 6px rgba(232,123,69,.12);
+  background: var(--green);
+  box-shadow: 0 0 0 6px rgba(80,255,141,.10), 0 0 18px rgba(80,255,141,.95);
 }
 
-.section { padding: 96px 0; }
+.section { padding: 104px 0; }
 .section-head {
   display: grid;
-  grid-template-columns: 1fr .82fr;
+  grid-template-columns: 1fr .84fr;
   gap: 44px;
   align-items: end;
-  margin-bottom: 36px;
+  margin-bottom: 38px;
 }
 .section-head h2 {
-  margin-top: 16px;
-  font-family: var(--serif);
-  font-size: clamp(45px, 7vw, 92px);
-  line-height: .92;
-  letter-spacing: -2px;
+  margin-top: 18px;
+  font-family: var(--display);
+  font-size: clamp(40px, 6vw, 78px);
+  line-height: .96;
+  letter-spacing: -3px;
+  text-transform: uppercase;
 }
+.section-head h2 span { color: var(--cyan); text-shadow: 0 0 30px rgba(52,255,229,.34); }
 .section-head p {
   color: var(--muted);
   line-height: 1.85;
   font-size: 16px;
 }
 
-/* =========================================================
-   LOGO + NAV
-========================================================= */
-
+/* NAV */
 .nav-wrap {
   position: fixed;
   top: 16px;
   left: 0;
   right: 0;
-  z-index: 90;
+  z-index: 100;
 }
 .nav {
-  width: min(1180px, calc(100% - 32px));
-  margin: auto;
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: 16px;
   align-items: center;
+  gap: 16px;
   padding: 10px;
-  border-radius: 24px;
-  background: rgba(255,253,248,.72);
-  border: 1px solid rgba(17,17,17,.11);
-  box-shadow: 0 16px 50px rgba(28,24,20,.10);
-  backdrop-filter: blur(22px) saturate(150%);
+  border-radius: 26px;
+  background: rgba(2, 12, 10, .70);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 70px rgba(0,0,0,.46), 0 0 50px rgba(52,255,229,.08);
+  backdrop-filter: blur(24px) saturate(170%);
 }
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding-left: 6px;
-  font-weight: 950;
-  letter-spacing: -.7px;
+  gap: 12px;
+  padding-left: 4px;
 }
-.logo-symbol {
-  width: 44px;
-  height: 44px;
-  position: relative;
-  display: grid;
-  place-items: center;
-  border-radius: 18px;
-  background: var(--ink);
-  color: white;
-  box-shadow: 0 18px 36px rgba(17,17,17,.16);
-  overflow: hidden;
+.logo img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 0 26px rgba(52,255,229,.42);
 }
-.logo-symbol::before {
-  content: "";
-  position: absolute;
-  inset: -45%;
-  background: conic-gradient(from 160deg, var(--brand), var(--orange), var(--yellow), var(--brand));
-  animation: logoSpin 7s linear infinite;
+.logo-text {
+  font-family: var(--display);
+  font-size: 19px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -.8px;
 }
-.logo-symbol::after {
-  content: "SOS";
-  position: absolute;
-  inset: 3px;
-  display: grid;
-  place-items: center;
-  border-radius: 15px;
-  background: var(--ink);
-  font-size: 11px;
-  font-weight: 950;
+.logo-text span { color: var(--cyan); }
+.logo-sub {
+  display: block;
+  margin-top: 4px;
+  color: var(--soft);
+  font-family: var(--font);
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
 }
-@keyframes logoSpin { to { transform: rotate(360deg); } }
-.logo-text span { color: var(--brand); }
 .nav-links {
   display: flex;
   justify-content: center;
@@ -254,68 +307,57 @@ button, input, textarea { font: inherit; }
   font-weight: 850;
   transition: .25s;
 }
-.nav-links a:hover { background: rgba(13,92,99,.07); color: var(--brand2); }
+.nav-links a:hover { color: var(--text); background: rgba(52,255,229,.075); }
 .nav-actions { display: flex; gap: 8px; align-items: center; }
 .lang-btn {
   width: 44px;
   height: 44px;
   border-radius: 999px;
   border: 1px solid var(--line);
-  background: rgba(255,255,255,.62);
-  color: var(--ink);
+  background: rgba(255,255,255,.055);
+  color: var(--text);
   font-weight: 950;
   cursor: pointer;
   transition: .25s;
 }
-.lang-btn:hover { transform: translateY(-2px); background: white; box-shadow: var(--shadow2); }
+.lang-btn:hover { transform: translateY(-2px); border-color: var(--line2); box-shadow: 0 0 28px rgba(52,255,229,.18); }
 .nav .btn { min-height: 44px; padding: 11px 16px; font-size: 13px; }
 
-/* =========================================================
-   HERO — NEW STRUCTURE
-========================================================= */
-
+/* HERO */
 .hero {
   min-height: 100vh;
-  padding: 152px 0 74px;
+  padding: 160px 0 74px;
   display: grid;
   align-items: center;
 }
 .hero-layout {
   display: grid;
-  grid-template-columns: 1.05fr .95fr;
-  gap: 28px;
+  grid-template-columns: 1fr .94fr;
+  gap: 30px;
   align-items: center;
 }
 .hero h1 {
-  margin: 22px 0 24px;
-  font-family: var(--serif);
-  font-size: clamp(62px, 9vw, 128px);
-  line-height: .84;
-  letter-spacing: -3.4px;
+  margin: 24px 0;
+  font-family: var(--display);
+  font-size: clamp(50px, 7.2vw, 112px);
+  line-height: .88;
+  letter-spacing: -5px;
+  text-transform: uppercase;
 }
 .hero h1 strong {
   display: block;
-  color: var(--brand);
+  color: var(--cyan);
+  text-shadow: 0 0 42px rgba(52,255,229,.38);
 }
 .hero-copy {
   max-width: 700px;
   color: var(--muted);
-  font-size: clamp(16px, 1.5vw, 18px);
+  font-size: clamp(16px, 1.45vw, 18px);
   line-height: 1.9;
 }
-.hero-copy strong { color: var(--ink); }
-.hero-actions {
-  margin-top: 32px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.trust-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin-top: 26px;
-}
+.hero-copy strong { color: var(--text); }
+.hero-actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; }
+.trust-row { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 26px; }
 .trust-pill {
   display: inline-flex;
   align-items: center;
@@ -323,187 +365,136 @@ button, input, textarea { font: inherit; }
   padding: 10px 12px;
   border-radius: 999px;
   border: 1px solid var(--line);
-  background: rgba(255,255,255,.58);
-  color: var(--ink2);
+  background: rgba(255,255,255,.045);
+  color: var(--text);
   font-size: 13px;
   font-weight: 800;
 }
-.trust-pill::before { content: "✓"; color: var(--brand); font-weight: 950; }
+.trust-pill::before { content: "✓"; color: var(--green); font-weight: 950; }
 
-.dashboard-card {
+.quantum-card {
   position: relative;
   border-radius: 38px;
-  background: rgba(255,253,248,.72);
-  border: 1px solid rgba(17,17,17,.12);
-  box-shadow: var(--shadow);
+  background: linear-gradient(145deg, rgba(7,35,31,.82), rgba(2,8,6,.92));
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow2), 0 0 70px rgba(52,255,229,.13);
   padding: 24px;
   overflow: hidden;
 }
-.dashboard-card::before {
+.quantum-card::before {
   content: "";
   position: absolute;
-  width: 360px;
-  height: 360px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(13,92,99,.18), transparent 68%);
-  top: -150px;
-  right: -130px;
+  inset: -40%;
+  background: conic-gradient(from 180deg, transparent, rgba(52,255,229,.18), transparent, rgba(80,255,141,.12), transparent);
+  animation: cardSpin 12s linear infinite;
 }
-.dash-top {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+.quantum-card::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 37px;
+  background: rgba(2,8,6,.86);
+  backdrop-filter: blur(10px);
 }
+@keyframes cardSpin { to { transform: rotate(360deg); } }
+.quantum-inner { position: relative; z-index: 1; }
+.dash-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .status {
   display: inline-flex;
   align-items: center;
   gap: 9px;
   padding: 9px 12px;
   border-radius: 999px;
-  background: rgba(13,92,99,.09);
-  color: var(--brand2);
+  background: rgba(80,255,141,.10);
+  color: #c8ffdc;
+  border: 1px solid rgba(80,255,141,.22);
   font-size: 12px;
   font-weight: 950;
 }
-.status::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #31b77d;
-  box-shadow: 0 0 0 7px rgba(49,183,125,.12);
+.status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 18px rgba(80,255,141,.90); }
+.card-logo {
+  width: 74px;
+  height: 74px;
+  border-radius: 22px;
+  object-fit: cover;
+  box-shadow: 0 0 32px rgba(52,255,229,.40);
 }
-.dash-logo {
-  font-family: var(--serif);
-  font-size: 26px;
-  color: var(--brand);
-}
-.lead-orbit {
-  position: relative;
-  z-index: 1;
-  height: 310px;
-  display: grid;
-  place-items: center;
-}
+.lead-orbit { position: relative; z-index: 1; height: 330px; display: grid; place-items: center; }
 .orbit-ring {
   position: absolute;
-  width: 260px;
-  height: 260px;
+  width: 265px;
+  height: 265px;
   border-radius: 50%;
-  border: 1px dashed rgba(13,92,99,.30);
-  animation: slowRotate 20s linear infinite;
+  border: 1px dashed rgba(52,255,229,.36);
+  animation: slowRotate 18s linear infinite;
 }
-.orbit-ring.two { width: 190px; height: 190px; animation-direction: reverse; border-color: rgba(232,123,69,.32); }
+.orbit-ring.two { width: 190px; height: 190px; animation-direction: reverse; border-color: rgba(80,255,141,.32); }
+.orbit-ring.three { width: 320px; height: 120px; border-radius: 50%; transform: rotate(-28deg); border-color: rgba(255,255,255,.15); animation: pulseOrbit 5s ease-in-out infinite alternate; }
 @keyframes slowRotate { to { transform: rotate(360deg); } }
-.center-orb {
-  width: 138px;
-  height: 138px;
-  display: grid;
-  place-items: center;
-  border-radius: 38px;
-  background: linear-gradient(135deg, var(--brand), var(--brand2));
-  color: white;
-  box-shadow: 0 26px 70px rgba(13,92,99,.30);
-  transform: rotate(-8deg);
+@keyframes pulseOrbit { to { opacity: .45; transform: rotate(-28deg) scale(1.06); } }
+.center-logo {
+  width: 156px;
+  height: 156px;
+  border-radius: 34px;
+  object-fit: cover;
+  box-shadow: 0 0 56px rgba(52,255,229,.45);
+  animation: floatLogo 4s ease-in-out infinite alternate;
 }
-.center-orb span {
-  display: block;
-  font-family: var(--serif);
-  font-size: 40px;
-  line-height: .9;
-  transform: rotate(8deg);
-}
+@keyframes floatLogo { to { transform: translateY(-8px) scale(1.02); } }
 .float-note {
   position: absolute;
   padding: 12px 13px;
   border-radius: 18px;
-  background: white;
+  background: rgba(4,18,16,.90);
   border: 1px solid var(--line);
-  box-shadow: var(--shadow2);
+  box-shadow: 0 18px 45px rgba(0,0,0,.35);
   font-size: 12px;
   font-weight: 850;
-  color: var(--ink2);
+  color: var(--text);
   animation: bob 3.8s ease-in-out infinite alternate;
 }
-.float-note.n1 { top: 36px; left: 18px; }
-.float-note.n2 { top: 62px; right: 10px; animation-delay: -1.2s; }
-.float-note.n3 { bottom: 42px; left: 46px; animation-delay: -2.2s; }
+.float-note.n1 { top: 40px; left: 16px; }
+.float-note.n2 { top: 68px; right: 8px; animation-delay: -1.2s; }
+.float-note.n3 { bottom: 42px; left: 38px; animation-delay: -2.2s; }
 @keyframes bob { to { transform: translateY(-10px); } }
-.metric-grid {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
+.metric-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .metric {
   padding: 18px;
   border-radius: 24px;
-  background: white;
+  background: rgba(255,255,255,.055);
   border: 1px solid var(--line);
-  box-shadow: 0 10px 30px rgba(28,24,20,.06);
 }
-.metric b {
-  display: block;
-  font-family: var(--serif);
-  font-size: 38px;
-  line-height: 1;
-  color: var(--brand);
-  margin-bottom: 8px;
-}
+.metric b { display: block; font-family: var(--display); font-size: 30px; line-height: 1; color: var(--cyan); margin-bottom: 8px; }
 .metric span { color: var(--muted); font-size: 12px; line-height: 1.4; }
 
-/* =========================================================
-   SOCIAL-PROOF BAR
-========================================================= */
-
-.proof-bar {
-  padding: 22px 0 0;
-}
-.proof-inner {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
+/* PROOF */
+.proof-bar { padding: 22px 0 0; }
+.proof-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .proof-item {
-  min-height: 114px;
+  min-height: 118px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 22px;
   border-radius: 26px;
-  background: rgba(255,255,255,.62);
+  background: rgba(255,255,255,.045);
   border: 1px solid var(--line);
   box-shadow: var(--shadow2);
   transition: .25s;
 }
-.proof-item:hover { transform: translateY(-5px); background: white; }
-.proof-item b { font-family: var(--serif); font-size: 42px; line-height: 1; color: var(--orange2); margin-bottom: 8px; }
+.proof-item:hover { transform: translateY(-6px); border-color: var(--line2); box-shadow: 0 22px 70px rgba(52,255,229,.12); }
+.proof-item b { font-family: var(--display); font-size: 34px; line-height: 1; color: var(--green); margin-bottom: 8px; }
 .proof-item span { color: var(--muted); font-size: 13px; line-height: 1.45; }
 
-/* =========================================================
-   OFFER SECTION
-========================================================= */
-
-.offer {
-  display: grid;
-  grid-template-columns: .85fr 1.15fr;
-  gap: 20px;
-}
+/* OFFER */
+.offer { display: grid; grid-template-columns: .86fr 1.14fr; gap: 20px; }
 .offer-story, .offer-list {
-  border-radius: var(--radius);
+  border-radius: 32px;
   padding: clamp(28px, 4vw, 46px);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow2);
+  border: 1px solid var(--line);
 }
-.offer-story {
-  background: var(--ink);
-  color: white;
-  position: relative;
-  overflow: hidden;
-}
+.offer-story { background: rgba(2,8,6,.86); color: white; position: relative; overflow: hidden; }
 .offer-story::after {
   content: "";
   position: absolute;
@@ -512,20 +503,18 @@ button, input, textarea { font: inherit; }
   border-radius: 50%;
   right: -110px;
   bottom: -110px;
-  background: radial-gradient(circle, rgba(245,201,107,.24), transparent 68%);
+  background: radial-gradient(circle, rgba(52,255,229,.24), transparent 68%);
 }
 .offer-story h2, .offer-list h2 {
-  font-family: var(--serif);
-  font-size: clamp(44px, 5.6vw, 78px);
-  line-height: .92;
-  letter-spacing: -1.8px;
+  font-family: var(--display);
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: .98;
+  letter-spacing: -2px;
+  text-transform: uppercase;
   margin: 20px 0;
 }
-.offer-story p { color: rgba(255,255,255,.72); line-height: 1.85; position: relative; z-index: 1; }
-.offer-list {
-  background: var(--paper);
-  border: 1px solid var(--line);
-}
+.offer-story p, .offer-list p { color: var(--muted); line-height: 1.85; position: relative; z-index: 1; }
+.offer-list { background: rgba(255,255,255,.045); }
 .reasons { display: grid; gap: 14px; margin-top: 24px; }
 .reason {
   display: grid;
@@ -534,8 +523,8 @@ button, input, textarea { font: inherit; }
   align-items: start;
   padding: 17px;
   border-radius: 22px;
-  background: rgba(13,92,99,.055);
-  border: 1px solid rgba(13,92,99,.10);
+  background: rgba(52,255,229,.055);
+  border: 1px solid var(--line);
 }
 .reason b {
   width: 44px;
@@ -543,37 +532,31 @@ button, input, textarea { font: inherit; }
   display: grid;
   place-items: center;
   border-radius: 16px;
-  background: var(--brand);
-  color: white;
+  background: linear-gradient(135deg, var(--cyan), var(--green));
+  color: #001311;
+  font-weight: 950;
 }
-.reason h3 { font-size: 16px; margin-bottom: 5px; }
+.reason h3 { font-size: 16px; margin-bottom: 5px; color: var(--text); }
 .reason p { color: var(--muted); line-height: 1.65; font-size: 14px; }
 
-/* =========================================================
-   PRICING
-========================================================= */
-
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
+/* PRICING */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .plan {
   position: relative;
   overflow: hidden;
   border-radius: 32px;
   padding: 30px;
-  background: rgba(255,255,255,.68);
+  background: rgba(255,255,255,.045);
   border: 1px solid var(--line);
   box-shadow: var(--shadow2);
   transition: .25s;
 }
-.plan:hover { transform: translateY(-8px); background: white; box-shadow: var(--shadow); }
+.plan:hover { transform: translateY(-8px); border-color: var(--line2); box-shadow: 0 30px 90px rgba(52,255,229,.11); }
 .plan.featured {
-  background: linear-gradient(160deg, var(--brand2), var(--brand));
+  background: linear-gradient(160deg, rgba(0,191,174,.30), rgba(2,8,6,.90));
   color: white;
   transform: translateY(-12px);
-  box-shadow: 0 32px 90px rgba(13,92,99,.25);
+  box-shadow: 0 32px 90px rgba(52,255,229,.16);
 }
 .plan.featured::before {
   content: "";
@@ -581,7 +564,7 @@ button, input, textarea { font: inherit; }
   width: 280px;
   height: 280px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,201,107,.30), transparent 68%);
+  background: radial-gradient(circle, rgba(80,255,141,.25), transparent 68%);
   right: -120px;
   top: -120px;
 }
@@ -590,340 +573,132 @@ button, input, textarea { font: inherit; }
   display: inline-flex;
   padding: 8px 12px;
   border-radius: 999px;
-  background: rgba(13,92,99,.10);
-  color: var(--brand2);
+  background: rgba(52,255,229,.10);
+  color: var(--cyan);
+  border: 1px solid var(--line);
   font-size: 11px;
   font-weight: 950;
   text-transform: uppercase;
   margin-bottom: 18px;
 }
-.plan.featured .badge { background: rgba(255,255,255,.13); color: #e8fff5; }
-.plan h3 {
-  font-family: var(--serif);
-  font-size: 42px;
-  line-height: .95;
-  letter-spacing: -1px;
-  margin-bottom: 13px;
-}
-.plan-desc {
-  min-height: 75px;
-  color: var(--muted);
-  line-height: 1.7;
-  font-size: 14px;
-  margin-bottom: 24px;
-}
-.plan.featured .plan-desc { color: rgba(255,255,255,.75); }
-.price {
-  font-family: var(--serif);
-  font-size: 62px;
-  line-height: 1;
-  letter-spacing: -2px;
-  color: var(--brand);
-  margin-bottom: 6px;
-}
-.plan.featured .price { color: white; }
+.plan h3 { font-family: var(--display); font-size: 32px; line-height: 1; letter-spacing: -1px; margin-bottom: 13px; text-transform: uppercase; }
+.plan-desc { min-height: 76px; color: var(--muted); line-height: 1.7; font-size: 14px; margin-bottom: 24px; }
+.price { font-family: var(--display); font-size: 46px; line-height: 1; letter-spacing: -2px; color: var(--cyan); margin-bottom: 6px; }
 .price small { font-family: var(--font); font-size: 14px; color: var(--soft); letter-spacing: 0; }
-.plan.featured .price small { color: rgba(255,255,255,.62); }
-.term { color: var(--orange2); font-size: 13px; font-weight: 900; margin-bottom: 24px; }
-.plan.featured .term { color: #f8dbad; }
-.features {
-  display: grid;
-  gap: 13px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
-  margin-bottom: 28px;
-}
-.plan.featured .features { border-top-color: rgba(255,255,255,.16); }
-.features li {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  color: var(--ink2);
-  font-size: 14px;
-  line-height: 1.45;
-  font-weight: 700;
-}
-.plan.featured .features li { color: white; }
-.features li::before { content: "✓"; color: var(--brand); font-weight: 950; }
-.plan.featured .features li::before { color: #dff6e8; }
+.term { color: var(--amber); font-size: 13px; font-weight: 900; margin-bottom: 24px; }
+.features { display: grid; gap: 13px; padding-top: 24px; border-top: 1px solid var(--line); margin-bottom: 28px; }
+.features li { display: flex; gap: 10px; align-items: flex-start; color: var(--text); font-size: 14px; line-height: 1.45; font-weight: 700; }
+.features li::before { content: "✓"; color: var(--green); font-weight: 950; }
 .plan .btn { width: 100%; }
 
-/* =========================================================
-   CONTACT
-========================================================= */
-
+/* CONTACT */
 .contact-card {
   display: grid;
   grid-template-columns: .88fr 1.12fr;
   overflow: hidden;
   border-radius: 40px;
-  background: var(--paper);
+  background: rgba(255,255,255,.045);
   border: 1px solid var(--line);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow2);
 }
-.contact-cta {
-  padding: clamp(30px, 5vw, 58px);
-  background: linear-gradient(160deg, var(--ink), #28231f);
-  color: white;
-  position: relative;
-  overflow: hidden;
-}
-.contact-cta::before {
-  content: "";
-  position: absolute;
-  width: 330px;
-  height: 330px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(232,123,69,.35), transparent 66%);
-  right: -140px;
-  bottom: -140px;
-}
+.contact-cta { padding: clamp(30px, 5vw, 58px); background: rgba(2,8,6,.92); color: white; position: relative; overflow: hidden; }
+.contact-cta::before { content: ""; position: absolute; width: 330px; height: 330px; border-radius: 50%; background: radial-gradient(circle, rgba(52,255,229,.28), transparent 66%); right: -140px; bottom: -140px; }
 .contact-cta > * { position: relative; z-index: 1; }
-.contact-cta h2 {
-  font-family: var(--serif);
-  font-size: clamp(48px, 7vw, 92px);
-  line-height: .88;
-  letter-spacing: -2px;
-  margin: 20px 0;
-}
-.contact-cta p { color: rgba(255,255,255,.72); line-height: 1.85; margin-bottom: 24px; }
+.contact-cta h2 { font-family: var(--display); font-size: clamp(36px, 6vw, 74px); line-height: .96; letter-spacing: -3px; text-transform: uppercase; margin: 20px 0; }
+.contact-cta p { color: var(--muted); line-height: 1.85; margin-bottom: 24px; }
 .contact-links { display: grid; gap: 12px; }
-.phone-btn {
-  min-height: 76px;
-  font-family: var(--serif);
-  font-size: clamp(25px, 4vw, 42px);
-  letter-spacing: -1.5px;
-}
-.email-btn { background: rgba(255,255,255,.09); color: white; border-color: rgba(255,255,255,.15); }
-.email-btn:hover { background: rgba(255,255,255,.14); }
-.form-side {
-  padding: clamp(30px, 4.5vw, 54px);
-}
+.phone-btn { min-height: 76px; font-family: var(--display); font-size: clamp(22px, 3.2vw, 34px); letter-spacing: -1.5px; }
+.email-btn { background: rgba(255,255,255,.075); color: white; border-color: var(--line); }
+.email-btn:hover { background: rgba(255,255,255,.11); }
+.form-side { padding: clamp(30px, 4.5vw, 54px); }
 .form-grid { display: grid; gap: 16px; }
-.field label {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  font-weight: 950;
-}
+.field label { display: block; margin-bottom: 8px; color: var(--muted); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 950; }
 .field input, .field textarea {
   width: 100%;
   border: 1px solid var(--line);
-  background: rgba(255,255,255,.70);
-  color: var(--ink);
+  background: rgba(255,255,255,.055);
+  color: var(--text);
   border-radius: 18px;
   padding: 15px 16px;
   outline: none;
   transition: .25s;
 }
 .field textarea { min-height: 126px; resize: vertical; }
-.field input:focus, .field textarea:focus {
-  border-color: rgba(13,92,99,.45);
-  box-shadow: 0 0 0 4px rgba(13,92,99,.10);
-  background: white;
-}
+.field input:focus, .field textarea:focus { border-color: var(--line2); box-shadow: 0 0 0 4px rgba(52,255,229,.10); background: rgba(255,255,255,.08); }
 .submit-btn { width: 100%; border: 0; }
 
-/* =========================================================
-   CHATBOT
-========================================================= */
-
-.chat-launcher {
-  position: fixed;
-  right: 22px;
-  bottom: 22px;
-  z-index: 120;
-  width: 66px;
-  height: 66px;
-  border-radius: 24px;
-  border: 0;
-  background: linear-gradient(135deg, var(--brand), var(--brand2));
-  color: white;
-  box-shadow: 0 20px 55px rgba(13,92,99,.35);
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  transition: .25s;
-}
-.chat-launcher:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 26px 72px rgba(13,92,99,.45); }
+/* CHATBOT */
+.chat-launcher { position: fixed; right: 22px; bottom: 22px; z-index: 120; width: 66px; height: 66px; border-radius: 24px; border: 0; background: linear-gradient(135deg, var(--cyan), var(--green)); color: #001311; box-shadow: 0 20px 55px rgba(52,255,229,.35); cursor: pointer; display: grid; place-items: center; transition: .25s; }
+.chat-launcher:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 26px 72px rgba(52,255,229,.45); }
 .chat-launcher svg { width: 30px; height: 30px; }
-.chat-window {
-  position: fixed;
-  right: 22px;
-  bottom: 100px;
-  z-index: 121;
-  width: min(390px, calc(100vw - 28px));
-  height: 560px;
-  max-height: calc(100vh - 130px);
-  display: none;
-  flex-direction: column;
-  border-radius: 28px;
-  overflow: hidden;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  box-shadow: 0 32px 100px rgba(28,24,20,.22);
-}
+.chat-window { position: fixed; right: 22px; bottom: 100px; z-index: 121; width: min(390px, calc(100vw - 28px)); height: 560px; max-height: calc(100vh - 130px); display: none; flex-direction: column; border-radius: 28px; overflow: hidden; background: #041210; border: 1px solid var(--line); box-shadow: 0 32px 100px rgba(0,0,0,.50), 0 0 55px rgba(52,255,229,.14); }
 .chat-window.open { display: flex; animation: chatIn .22s ease-out; }
 @keyframes chatIn { from { opacity: 0; transform: translateY(20px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
-.chat-head {
-  padding: 18px;
-  background: linear-gradient(135deg, var(--brand), var(--brand2));
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+.chat-head { padding: 18px; background: linear-gradient(135deg, #063c37, #031514); color: white; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
 .chat-agent { display: flex; align-items: center; gap: 12px; }
-.agent-avatar {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border-radius: 16px;
-  background: rgba(255,255,255,.14);
-  font-weight: 950;
-}
+.agent-avatar { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 14px; background-image: url('/sos-logo.png'); background-size: cover; background-position: center; box-shadow: 0 0 18px rgba(52,255,229,.36); color: transparent; }
 .chat-agent strong { display: block; font-size: 14px; }
 .chat-agent span { display: block; color: rgba(255,255,255,.72); font-size: 12px; margin-top: 2px; }
-.chat-close {
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.10);
-  color: white;
-  cursor: pointer;
-}
-.chat-body {
-  flex: 1;
-  padding: 18px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.msg {
-  max-width: 88%;
-  padding: 12px 14px;
-  border-radius: 18px;
-  font-size: 14px;
-  line-height: 1.5;
-}
-.msg.bot { background: white; border: 1px solid var(--line); color: var(--ink); border-top-left-radius: 6px; }
-.msg.user { align-self: flex-end; background: var(--brand); color: white; border-top-right-radius: 6px; }
-.quick-replies {
-  padding: 0 18px 14px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.quick-replies button {
-  border: 1px solid var(--line);
-  background: white;
-  color: var(--brand2);
-  padding: 9px 11px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 850;
-  cursor: pointer;
-  transition: .2s;
-}
-.quick-replies button:hover { background: var(--mint); }
-.chat-input {
-  border-top: 1px solid var(--line);
-  padding: 12px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 8px;
-  background: rgba(255,255,255,.50);
-}
-.chat-input input {
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 12px 14px;
-  outline: none;
-}
-.chat-input button {
-  border: 0;
-  border-radius: 999px;
-  background: var(--brand);
-  color: white;
-  padding: 0 15px;
-  font-weight: 900;
-  cursor: pointer;
-}
+.chat-close { width: 36px; height: 36px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.10); color: white; cursor: pointer; }
+.chat-body { flex: 1; padding: 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+.msg { max-width: 88%; padding: 12px 14px; border-radius: 18px; font-size: 14px; line-height: 1.5; }
+.msg.bot { background: rgba(255,255,255,.08); border: 1px solid var(--line); color: var(--text); border-top-left-radius: 6px; }
+.msg.user { align-self: flex-end; background: linear-gradient(135deg, var(--cyan2), #06645c); color: white; border-top-right-radius: 6px; }
+.quick-replies { padding: 0 18px 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+.quick-replies button { border: 1px solid var(--line); background: rgba(255,255,255,.075); color: var(--cyan); padding: 9px 11px; border-radius: 999px; font-size: 12px; font-weight: 850; cursor: pointer; transition: .2s; }
+.quick-replies button:hover { background: rgba(52,255,229,.12); }
+.chat-input { border-top: 1px solid var(--line); padding: 12px; display: grid; grid-template-columns: 1fr auto; gap: 8px; background: rgba(255,255,255,.045); }
+.chat-input input { border: 1px solid var(--line); border-radius: 999px; padding: 12px 14px; outline: none; background: rgba(255,255,255,.075); color: var(--text); }
+.chat-input button { border: 0; border-radius: 999px; background: var(--cyan); color: #001311; padding: 0 15px; font-weight: 900; cursor: pointer; }
 
-/* =========================================================
-   FOOTER
-========================================================= */
+/* FOOTER */
+.footer { padding: 38px 0 54px; color: var(--muted); font-size: 13px; }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.footer-logo { display: flex; align-items: center; gap: 10px; font-weight: 950; color: var(--text); font-size: 20px; }
+.footer-logo img { width: 40px; height: 40px; border-radius: 12px; box-shadow: 0 0 22px rgba(52,255,229,.32); }
+.footer-logo span { color: var(--cyan); }
 
-.footer {
-  padding: 38px 0 54px;
-  color: var(--muted);
-  font-size: 13px;
-}
-.footer-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-.footer-logo { font-weight: 950; color: var(--ink); font-size: 20px; }
-.footer-logo span { color: var(--brand); }
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
+/* RESPONSIVE */
 @media (max-width: 1040px) {
-  .hero-layout,
-  .offer,
-  .pricing-grid,
-  .contact-card,
-  .section-head { grid-template-columns: 1fr; }
+  .hero-layout, .offer, .pricing-grid, .contact-card, .section-head { grid-template-columns: 1fr; }
   .proof-inner { grid-template-columns: repeat(2, 1fr); }
   .plan.featured { transform: none; }
 }
-
 @media (max-width: 860px) {
   .nav { grid-template-columns: 1fr; text-align: center; }
   .logo, .nav-actions, .nav-links { justify-content: center; }
   .nav-links { display: none; }
   .nav-actions { flex-wrap: wrap; }
-  .hero { padding-top: 210px; }
-  .metric-grid { grid-template-columns: 1fr; }
-  .lead-orbit { height: 260px; }
-}
-
-@media (max-width: 620px) {
-  .shell { width: min(100% - 24px, 1180px); }
   .hero { padding-top: 230px; }
+  .metric-grid { grid-template-columns: 1fr; }
+  .lead-orbit { height: 280px; }
+  .hero h1 { letter-spacing: -3px; }
+}
+@media (max-width: 620px) {
+  .shell { width: min(100% - 24px, 1200px); }
+  .hero { padding-top: 260px; }
   .proof-inner { grid-template-columns: 1fr; }
-  .section { padding: 72px 0; }
-  .dashboard-card, .offer-story, .offer-list, .plan, .contact-card, .contact-cta, .form-side { border-radius: 24px; }
-  .nav .btn { width: 100%; }
-  .hero-actions .btn { width: 100%; }
+  .section { padding: 76px 0; }
+  .quantum-card, .offer-story, .offer-list, .plan, .contact-card, .contact-cta, .form-side { border-radius: 24px; }
+  .nav .btn, .hero-actions .btn { width: 100%; }
   .footer-inner { flex-direction: column; text-align: center; }
   .chat-window { right: 14px; bottom: 92px; }
   .chat-launcher { right: 14px; bottom: 14px; }
 }
-
 </style>
 </head>
 <body>
 
-<div class="blob blob-a"></div>
-<div class="blob blob-b"></div>
-<div class="blob blob-c"></div>
+<div class="matrix-rain" aria-hidden="true"></div>
+<div class="quantum-orb orb-a"></div>
+<div class="quantum-orb orb-b"></div>
+<div class="quantum-orb orb-c"></div>
 
 <nav class="nav-wrap">
   <div class="nav">
     <a href="#top" class="logo" aria-label="SOS Digital Home">
-      <div class="logo-symbol"></div>
-      <div class="logo-text"><span>SOS</span> Digital</div>
+      <img src="/sos-logo.png" alt="SOS Digital logo">
+      <div class="logo-text"><span>SOS</span> Digital <small class="logo-sub">Quantum Growth</small></div>
     </a>
 
     <div class="nav-links">
@@ -945,26 +720,16 @@ button, input, textarea { font: inherit; }
 <header class="hero" id="top">
   <div class="shell hero-layout">
     <div>
-      <div class="eyebrow">
-        <span class="fr">Formés pour l'imprévisible</span>
-        <span class="en">Built for unpredictable demand</span>
-      </div>
-
-      <h1>
-        <span class="fr">Dominez votre <strong>marché local.</strong></span>
-        <span class="en">Dominate your <strong>local market.</strong></span>
-      </h1>
-
+      <div class="eyebrow"><span class="fr">Formés pour l'imprévisible</span><span class="en">Built for unpredictable demand</span></div>
+      <h1><span class="fr">Dominez votre <strong>marché local.</strong></span><span class="en">Dominate your <strong>local market.</strong></span></h1>
       <p class="hero-copy">
         <span class="fr">Nous propulsons <strong>VOTRE</strong> présence numérique. Nous aidons les contracteurs, entreprises et experts HVAC de la Rive-Sud à générer plus d’appels qualifiés et de chantiers réservés grâce à une présence numérique optimisée. Des <strong>résultats concrets, ciblés sur vos services</strong> — sans exploser votre budget.</span>
         <span class="en">We elevate <strong>YOUR</strong> digital presence. Get <strong>more qualified calls and a schedule with booked jobs.</strong> We help South Shore contractors and HVAC experts grow with optimized digital strategies — without wasting your budget.</span>
       </p>
-
       <div class="hero-actions">
         <a href="#pricing" class="btn btn-primary"><span class="fr">Voir les forfaits</span><span class="en">View Packages</span></a>
         <a href="#chat" onclick="openChat(); return false;" class="btn btn-ghost"><span class="fr">Parler à l’assistant IA</span><span class="en">Talk to AI assistant</span></a>
       </div>
-
       <div class="trust-row">
         <div class="trust-pill fr">Prix simples</div><div class="trust-pill en">Simple pricing</div>
         <div class="trust-pill fr">Pensé pour appels qualifiés</div><div class="trust-pill en">Built for qualified calls</div>
@@ -972,25 +737,24 @@ button, input, textarea { font: inherit; }
       </div>
     </div>
 
-    <aside class="dashboard-card">
-      <div class="dash-top">
-        <div class="status"><span class="fr">Lead Engine Actif</span><span class="en">Lead Engine Active</span></div>
-        <div class="dash-logo">SOS</div>
-      </div>
-
-      <div class="lead-orbit">
-        <div class="orbit-ring"></div>
-        <div class="orbit-ring two"></div>
-        <div class="center-orb"><span>Local<br>AI</span></div>
-        <div class="float-note n1 fr">Appels qualifiés</div><div class="float-note n1 en">Qualified calls</div>
-        <div class="float-note n2 fr">Google local</div><div class="float-note n2 en">Local Google</div>
-        <div class="float-note n3 fr">Suivi rapide</div><div class="float-note n3 en">Fast follow-up</div>
-      </div>
-
-      <div class="metric-grid">
-        <div class="metric"><b>3.4x</b><span class="fr">Augmentation moyenne des appels directs</span><span class="en">Average increase in direct calls</span></div>
-        <div class="metric"><b>#1</b><span class="fr">Objectif Google Maps local</span><span class="en">Local Google Maps target</span></div>
-        <div class="metric"><b>&lt;5m</b><span class="fr">Réponse automatisée</span><span class="en">Automated response speed</span></div>
+    <aside class="quantum-card">
+      <div class="quantum-inner">
+        <div class="dash-top">
+          <div class="status"><span class="fr">Lead Engine Actif</span><span class="en">Lead Engine Active</span></div>
+          <img class="card-logo" src="/sos-logo.png" alt="SOS Digital logo">
+        </div>
+        <div class="lead-orbit">
+          <div class="orbit-ring"></div><div class="orbit-ring two"></div><div class="orbit-ring three"></div>
+          <img class="center-logo" src="/sos-logo.png" alt="SOS Digital quantum logo">
+          <div class="float-note n1 fr">Appels qualifiés</div><div class="float-note n1 en">Qualified calls</div>
+          <div class="float-note n2 fr">Google local</div><div class="float-note n2 en">Local Google</div>
+          <div class="float-note n3 fr">Suivi rapide</div><div class="float-note n3 en">Fast follow-up</div>
+        </div>
+        <div class="metric-grid">
+          <div class="metric"><b>3.4x</b><span class="fr">Augmentation moyenne des appels directs</span><span class="en">Average increase in direct calls</span></div>
+          <div class="metric"><b>#1</b><span class="fr">Objectif Google Maps local</span><span class="en">Local Google Maps target</span></div>
+          <div class="metric"><b>&lt;5m</b><span class="fr">Réponse automatisée</span><span class="en">Automated response speed</span></div>
+        </div>
       </div>
     </aside>
   </div>
@@ -1009,17 +773,13 @@ button, input, textarea { font: inherit; }
   <div class="shell offer">
     <div class="offer-story">
       <div class="eyebrow"><span class="fr">Le problème</span><span class="en">The problem</span></div>
-      <h2 class="fr">Les clients choisissent vite.</h2>
-      <h2 class="en">Customers choose fast.</h2>
+      <h2 class="fr">Les clients choisissent vite.</h2><h2 class="en">Customers choose fast.</h2>
       <p class="fr">Quand un propriétaire cherche un service résidentiel, il ne lit pas tout. Il choisit l’entreprise qui paraît claire, proche, fiable et facile à joindre. Votre site doit réduire l’hésitation et déclencher l’action.</p>
       <p class="en">When a homeowner searches for a home service, they do not read everything. They choose the business that feels clear, nearby, reliable, and easy to contact. Your site must reduce hesitation and trigger action.</p>
     </div>
-
     <div class="offer-list">
       <div class="eyebrow"><span class="fr">Ce que SOS construit</span><span class="en">What SOS builds</span></div>
-      <h2 class="fr">Un système qui guide vers l’appel.</h2>
-      <h2 class="en">A system that guides the call.</h2>
-
+      <h2 class="fr">Un système qui guide vers l’appel.</h2><h2 class="en">A system that guides the call.</h2>
       <div class="reasons">
         <div class="reason"><b>1</b><div><h3 class="fr">Clarté immédiate</h3><h3 class="en">Instant clarity</h3><p class="fr">Votre message doit être compris en quelques secondes.</p><p class="en">Your message must be understood in seconds.</p></div></div>
         <div class="reason"><b>2</b><div><h3 class="fr">Confiance locale</h3><h3 class="en">Local trust</h3><p class="fr">Le client doit sentir que vous êtes proche, crédible et opérationnel.</p><p class="en">Customers should feel you are nearby, credible, and operational.</p></div></div>
@@ -1032,310 +792,62 @@ button, input, textarea { font: inherit; }
 <section class="section" id="pricing">
   <div class="shell">
     <div class="section-head">
-      <div>
-        <div class="eyebrow"><span class="fr">Forfaits</span><span class="en">Packages</span></div>
-        <h2 class="fr">Choisissez votre vitesse de croissance.</h2>
-        <h2 class="en">Choose your speed of growth.</h2>
-      </div>
+      <div><div class="eyebrow"><span class="fr">Forfaits</span><span class="en">Packages</span></div><h2 class="fr">Choisissez votre <span>vitesse de croissance.</span></h2><h2 class="en">Choose your <span>speed of growth.</span></h2></div>
       <p class="fr">Des forfaits mensuels clairs sans engagement à long terme. Chaque niveau est pensé pour rendre votre présence locale plus visible, plus crédible et plus facile à contacter.</p>
       <p class="en">Clear monthly packages without long-term commitment. Each level is designed to make your local presence more visible, credible, and easier to contact.</p>
     </div>
-
     <div class="pricing-grid">
-      <div class="plan">
-        <div class="badge">Starter</div>
-        <h3>Local Starter</h3>
-        <p class="plan-desc fr">Essentiel pour verrouiller votre fiche Google Maps locale et attirer les appels de quartier.</p>
-        <p class="plan-desc en">Essential tracking optimization to instantly lock down immediate local area map searchers.</p>
-        <div class="price">74.99$ <small>/ mo</small></div>
-        <div class="term fr">Sans contrat à long terme</div><div class="term en">Cancel anytime subscription</div>
-        <ul class="features">
-          <li><span class="fr">Optimisation Google Business Profile</span><span class="en">Google Business Profile optimization</span></li>
-          <li><span class="fr">Générateur d'avis clients automatisé</span><span class="en">Automated customer review triggers</span></li>
-          <li><span class="fr">SEO de proximité — rayon 15 km</span><span class="en">Proximity local target search terms</span></li>
-          <li><span class="fr">Rapport de performance mensuel</span><span class="en">Monthly dashboard performance tracking</span></li>
-        </ul>
-        <a href="#contact" class="btn btn-ghost"><span class="fr">Activer maintenant</span><span class="en">Activate Starter</span></a>
-      </div>
-
-      <div class="plan featured">
-        <div class="badge"><span class="fr">Propulsion</span><span class="en">Most Popular</span></div>
-        <h3>Contractor Scale</h3>
-        <p class="plan-desc fr">Idéal pour les équipes en croissance exigeant un volume constant d'appels entrants.</p>
-        <p class="plan-desc en">Engineered for growing service crews who demand predictable phone booking volume.</p>
-        <div class="price">219.99$ <small>/ mo</small></div>
-        <div class="term fr">Exclusivité territoriale incluse</div><div class="term en">Territory protection guaranteed</div>
-        <ul class="features">
-          <li><span class="fr">Tout le forfait Local Starter</span><span class="en">Everything inside Local Starter plan</span></li>
-          <li><span class="fr">Landing page de conversion ultra-rapide</span><span class="en">Ultra-fast conversion landing page asset</span></li>
-          <li><span class="fr">Configuration & gestion Google Ads</span><span class="en">Google Search Ads pipeline setups</span></li>
-          <li><span class="fr">Automatisation SMS Instant Text-Back</span><span class="en">Instant missed-call SMS textback feature</span></li>
-        </ul>
-        <a href="#contact" class="btn btn-accent"><span class="fr">Choisir ce forfait</span><span class="en">Deploy Scale Engine</span></a>
-      </div>
-
-      <div class="plan">
-        <div class="badge">Authority</div>
-        <h3>Market Authority</h3>
-        <p class="plan-desc fr">Domination totale du marché régional multi-villes pour dépasser les concurrents majeurs.</p>
-        <p class="plan-desc en">Total dominant coverage across multiple service cities and expansion footprints.</p>
-        <div class="price">379.99$ <small>/ mo</small></div>
-        <div class="term fr">Priorité opérationnelle absolue</div><div class="term en">Full multi-city distribution</div>
-        <ul class="features">
-          <li><span class="fr">Campagnes multi-villes & multi-services</span><span class="en">Multi-city & multi-trade campaign tracking</span></li>
-          <li><span class="fr">Gestion omnicanale Google + Meta Ads</span><span class="en">Omnichannel architecture setup</span></li>
-          <li><span class="fr">Tunnel CRM sur mesure pour répartiteurs</span><span class="en">Custom CRM integrations for dispatch loops</span></li>
-          <li><span class="fr">Suivi des appels enregistrés dans le portail</span><span class="en">Recorded lead call logging in client portal</span></li>
-        </ul>
-        <a href="#contact" class="btn btn-ghost"><span class="fr">Sélectionner</span><span class="en">Deploy Domination</span></a>
-      </div>
+      <div class="plan"><div class="badge">Starter</div><h3>Local Starter</h3><p class="plan-desc fr">Essentiel pour verrouiller votre fiche Google Maps locale et attirer les appels de quartier.</p><p class="plan-desc en">Essential tracking optimization to instantly lock down immediate local area map searchers.</p><div class="price">74.99$ <small>/ mo</small></div><div class="term fr">Sans contrat à long terme</div><div class="term en">Cancel anytime subscription</div><ul class="features"><li><span class="fr">Optimisation Google Business Profile</span><span class="en">Google Business Profile optimization</span></li><li><span class="fr">Générateur d'avis clients automatisé</span><span class="en">Automated customer review triggers</span></li><li><span class="fr">SEO de proximité — rayon 15 km</span><span class="en">Proximity local target search terms</span></li><li><span class="fr">Rapport de performance mensuel</span><span class="en">Monthly dashboard performance tracking</span></li></ul><a href="#contact" class="btn btn-ghost"><span class="fr">Activer maintenant</span><span class="en">Activate Starter</span></a></div>
+      <div class="plan featured"><div class="badge"><span class="fr">Propulsion</span><span class="en">Most Popular</span></div><h3>Contractor Scale</h3><p class="plan-desc fr">Idéal pour les équipes en croissance exigeant un volume constant d'appels entrants.</p><p class="plan-desc en">Engineered for growing service crews who demand predictable phone booking volume.</p><div class="price">219.99$ <small>/ mo</small></div><div class="term fr">Exclusivité territoriale incluse</div><div class="term en">Territory protection guaranteed</div><ul class="features"><li><span class="fr">Tout le forfait Local Starter</span><span class="en">Everything inside Local Starter plan</span></li><li><span class="fr">Landing page de conversion ultra-rapide</span><span class="en">Ultra-fast conversion landing page asset</span></li><li><span class="fr">Configuration & gestion Google Ads</span><span class="en">Google Search Ads pipeline setups</span></li><li><span class="fr">Automatisation SMS Instant Text-Back</span><span class="en">Instant missed-call SMS textback feature</span></li></ul><a href="#contact" class="btn btn-alert"><span class="fr">Choisir ce forfait</span><span class="en">Deploy Scale Engine</span></a></div>
+      <div class="plan"><div class="badge">Authority</div><h3>Market Authority</h3><p class="plan-desc fr">Domination totale du marché régional multi-villes pour dépasser les concurrents majeurs.</p><p class="plan-desc en">Total dominant coverage across multiple service cities and expansion footprints.</p><div class="price">379.99$ <small>/ mo</small></div><div class="term fr">Priorité opérationnelle absolue</div><div class="term en">Full multi-city distribution</div><ul class="features"><li><span class="fr">Campagnes multi-villes & multi-services</span><span class="en">Multi-city & multi-trade campaign tracking</span></li><li><span class="fr">Gestion omnicanale Google + Meta Ads</span><span class="en">Omnichannel architecture setup</span></li><li><span class="fr">Tunnel CRM sur mesure pour répartiteurs</span><span class="en">Custom CRM integrations for dispatch loops</span></li><li><span class="fr">Suivi des appels enregistrés dans le portail</span><span class="en">Recorded lead call logging in client portal</span></li></ul><a href="#contact" class="btn btn-ghost"><span class="fr">Sélectionner</span><span class="en">Deploy Domination</span></a></div>
     </div>
   </div>
 </section>
 
 <section class="section" id="contact">
   <div class="shell contact-card">
-    <div class="contact-cta">
-      <div class="eyebrow"><span class="fr">Contactez-nous</span><span class="en">Get in touch</span></div>
-      <h2 class="fr">Démarrez votre machine à leads.</h2>
-      <h2 class="en">Start your growth engine.</h2>
-      <p class="fr">Pour toute demande de support, modification de forfait ou partenariat direct, contactez SOS Digital directement.</p>
-      <p class="en">For fast response support operations, billing items, or custom inquiries, contact SOS Digital directly.</p>
-      <div class="contact-links">
-        <a href="tel:+14389273462" class="btn btn-accent phone-btn">☎ (438) 927-3462</a>
-        <a href="mailto:info@sosdigital.ca" class="btn email-btn">✉ info@sosdigital.ca</a>
-      </div>
-    </div>
-
-    <div class="form-side">
-      <div class="form-grid">
-        <div class="field">
-          <label class="fr">Nom complet</label><label class="en">Full Name</label>
-          <input type="text" placeholder="Jean Tremblay">
-        </div>
-        <div class="field">
-          <label class="fr">Nom de l'entreprise</label><label class="en">Company Name</label>
-          <input type="text" placeholder="Plomberie Rive-Sud Inc.">
-        </div>
-        <div class="field">
-          <label class="fr">Téléphone ou courriel</label><label class="en">Phone or Email</label>
-          <input type="text" placeholder="450-555-0123 / nom@compagnie.com">
-        </div>
-        <div class="field">
-          <label class="fr">Votre question ou commentaire</label><label class="en">Your question or comment</label>
-          <textarea placeholder="Expliquez brièvement vos besoins ou posez vos questions ici..."></textarea>
-        </div>
-        <button class="btn btn-primary submit-btn"><span class="fr">Soumettre la demande</span><span class="en">Submit Request</span></button>
-      </div>
-    </div>
+    <div class="contact-cta"><div class="eyebrow"><span class="fr">Contactez-nous</span><span class="en">Get in touch</span></div><h2 class="fr">Démarrez votre machine à leads.</h2><h2 class="en">Start your growth engine.</h2><p class="fr">Pour toute demande de support, modification de forfait ou partenariat direct, contactez SOS Digital directement.</p><p class="en">For fast response support operations, billing items, or custom inquiries, contact SOS Digital directly.</p><div class="contact-links"><a href="tel:+14389273462" class="btn btn-alert phone-btn">☎ (438) 927-3462</a><a href="mailto:info@sosdigital.ca" class="btn email-btn">✉ info@sosdigital.ca</a></div></div>
+    <div class="form-side"><div class="form-grid"><div class="field"><label class="fr">Nom complet</label><label class="en">Full Name</label><input type="text" placeholder="Jean Tremblay"></div><div class="field"><label class="fr">Nom de l'entreprise</label><label class="en">Company Name</label><input type="text" placeholder="Plomberie Rive-Sud Inc."></div><div class="field"><label class="fr">Téléphone ou courriel</label><label class="en">Phone or Email</label><input type="text" placeholder="450-555-0123 / nom@compagnie.com"></div><div class="field"><label class="fr">Votre question ou commentaire</label><label class="en">Your question or comment</label><textarea placeholder="Expliquez brièvement vos besoins ou posez vos questions ici..."></textarea></div><button class="btn btn-primary submit-btn"><span class="fr">Soumettre la demande</span><span class="en">Submit Request</span></button></div></div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="shell footer-inner">
-    <div class="footer-logo"><span>SOS</span> Digital</div>
+    <div class="footer-logo"><img src="/sos-logo.png" alt="SOS Digital logo"><span>SOS</span> Digital</div>
     <p class="fr">La plateforme bilingue des contractants de la Rive-Sud · Châteauguay, QC · info@sosdigital.ca · (438) 927-3462</p>
     <p class="en">The bilingual engine built for South Shore contractors · Châteauguay, QC · info@sosdigital.ca · (438) 927-3462</p>
   </div>
 </footer>
 
 <button class="chat-launcher" onclick="toggleChat()" aria-label="Open SOS Digital AI Assistant" id="chat">
-  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <path d="M4 5.5C4 4.12 5.12 3 6.5 3h11C18.88 3 20 4.12 20 5.5v7c0 1.38-1.12 2.5-2.5 2.5H9l-5 4v-13.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-    <path d="M8 8h8M8 11h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  </svg>
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5.5C4 4.12 5.12 3 6.5 3h11C18.88 3 20 4.12 20 5.5v7c0 1.38-1.12 2.5-2.5 2.5H9l-5 4v-13.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 8h8M8 11h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
 </button>
 
 <div class="chat-window" id="chatWindow">
-  <div class="chat-head">
-    <div class="chat-agent">
-      <div class="agent-avatar">AI</div>
-      <div>
-        <strong>SOS Digital Assistant</strong>
-        <span class="fr">Assistant IA de qualification</span>
-        <span class="en">AI lead qualification assistant</span>
-      </div>
-    </div>
-    <button class="chat-close" onclick="toggleChat()">×</button>
-  </div>
-
-  <div class="chat-body" id="chatBody">
-    <div class="msg bot fr">Bonjour 👋 Je suis l’assistant IA de SOS Digital. Je peux vous aider à choisir un forfait, qualifier votre besoin et vous guider vers la meilleure prochaine étape.</div>
-    <div class="msg bot en">Hi 👋 I’m the SOS Digital AI assistant. I can help you choose a package, qualify your needs, and guide you to the best next step.</div>
-  </div>
-
-  <div class="quick-replies">
-    <button onclick="quickChat('Je veux plus d’appels qualifiés')" class="fr">Plus d’appels</button>
-    <button onclick="quickChat('I want more qualified calls')" class="en">More calls</button>
-    <button onclick="quickChat('Quel forfait recommandez-vous?')" class="fr">Forfait recommandé</button>
-    <button onclick="quickChat('Which package do you recommend?')" class="en">Recommended plan</button>
-    <button onclick="quickChat('Je veux parler à quelqu’un')" class="fr">Parler à quelqu’un</button>
-    <button onclick="quickChat('I want to speak with someone')" class="en">Talk to someone</button>
-  </div>
-
-  <div class="chat-input">
-    <input id="chatInput" type="text" placeholder="Écrivez votre message..." onkeydown="if(event.key==='Enter') sendChat()">
-    <button onclick="sendChat()">↗</button>
-  </div>
+  <div class="chat-head"><div class="chat-agent"><div class="agent-avatar">AI</div><div><strong>SOS Digital Assistant</strong><span class="fr">Assistant IA de qualification</span><span class="en">AI lead qualification assistant</span></div></div><button class="chat-close" onclick="toggleChat()">×</button></div>
+  <div class="chat-body" id="chatBody"><div class="msg bot fr">Bonjour 👋 Je suis l’assistant IA de SOS Digital. Je peux vous aider à choisir un forfait, qualifier votre besoin et vous guider vers la meilleure prochaine étape.</div><div class="msg bot en">Hi 👋 I’m the SOS Digital AI assistant. I can help you choose a package, qualify your needs, and guide you to the best next step.</div></div>
+  <div class="quick-replies"><button onclick="quickChat('Je veux plus d’appels qualifiés')" class="fr">Plus d’appels</button><button onclick="quickChat('I want more qualified calls')" class="en">More calls</button><button onclick="quickChat('Quel forfait recommandez-vous?')" class="fr">Forfait recommandé</button><button onclick="quickChat('Which package do you recommend?')" class="en">Recommended plan</button><button onclick="quickChat('Je veux parler à quelqu’un')" class="fr">Parler à quelqu’un</button><button onclick="quickChat('I want to speak with someone')" class="en">Talk to someone</button></div>
+  <div class="chat-input"><input id="chatInput" type="text" placeholder="Écrivez votre message..." onkeydown="if(event.key==='Enter') sendChat()"><button onclick="sendChat()">↗</button></div>
 </div>
 
 <script>
-function toggleLanguage() {
-  document.body.classList.toggle('lang-en');
-  const btn = document.querySelector('.lang-btn');
-  const input = document.getElementById('chatInput');
-  const isEn = document.body.classList.contains('lang-en');
-  btn.textContent = isEn ? 'FR' : 'EN';
-  input.placeholder = isEn ? 'Write your message...' : 'Écrivez votre message...';
-}
+function toggleLanguage(){document.body.classList.toggle('lang-en');const btn=document.querySelector('.lang-btn');const input=document.getElementById('chatInput');const isEn=document.body.classList.contains('lang-en');btn.textContent=isEn?'FR':'EN';input.placeholder=isEn?'Write your message...':'Écrivez votre message...'}
+function toggleChat(){document.getElementById('chatWindow').classList.toggle('open')}
+function openChat(){document.getElementById('chatWindow').classList.add('open')}
 
-function toggleChat() {
-  document.getElementById('chatWindow').classList.toggle('open');
-}
+const chatState={service:'',city:'',goal:'',step:0};
+function quickChat(text){addMessage(text,'user');setTimeout(()=>smartLocalReply(text),450)}
+function sendChat(){const input=document.getElementById('chatInput');const text=input.value.trim();if(!text)return;addMessage(text,'user');input.value='';setTimeout(()=>smartLocalReply(text),450)}
+function addMessage(text,who){const body=document.getElementById('chatBody');const div=document.createElement('div');div.className='msg '+who;div.textContent=text;body.appendChild(div);body.scrollTop=body.scrollHeight}
+function addTypingThenReply(reply){const body=document.getElementById('chatBody');const typing=document.createElement('div');typing.className='msg bot';typing.textContent='...';body.appendChild(typing);body.scrollTop=body.scrollHeight;setTimeout(()=>{typing.remove();addMessage(reply,'bot')},650)}
+function smartLocalReply(text){const isEn=document.body.classList.contains('lang-en');const t=text.toLowerCase();if(containsAny(t,['hvac','chauffage','climatisation','thermopompe']))chatState.service='HVAC';if(containsAny(t,['plombier','plomberie','plumber']))chatState.service='Plumbing';if(containsAny(t,['toiture','roof','roofer']))chatState.service='Roofing';if(containsAny(t,['electric','électricien','electrician']))chatState.service='Electrical';if(containsAny(t,['montreal','montréal']))chatState.city='Montréal';if(containsAny(t,['longueuil']))chatState.city='Longueuil';if(containsAny(t,['chateauguay','châteauguay']))chatState.city='Châteauguay';if(containsAny(t,['brossard']))chatState.city='Brossard';if(containsAny(t,['rive-sud','south shore']))chatState.city=isEn?'South Shore':'Rive-Sud';if(containsAny(t,['appel','calls','call','leads','prospects']))chatState.goal=isEn?'more qualified calls':'plus d’appels qualifiés';if(containsAny(t,['google','maps','seo','visibility','visibilité']))chatState.goal=isEn?'more Google visibility':'plus de visibilité Google';if(containsAny(t,['ads','publicité','pub','meta']))chatState.goal=isEn?'paid ads growth':'croissance avec publicité';if(containsAny(t,['forfait','package','plan','price','prix','cost','coût','combien','budget'])){addTypingThenReply(packageReply(isEn));return}if(containsAny(t,['recommend','recommande','meilleur','best','which package','quel forfait'])){addTypingThenReply(recommendationReply(isEn));return}if(containsAny(t,['talk','speak','parler','quelqu','human','humain','call me','appeler'])){addTypingThenReply(contactReply(isEn));return}if(containsAny(t,['hello','hi','bonjour','salut','allo'])){addTypingThenReply(isEn?'Hi 👋 I can help you choose the right SOS Digital package. What type of business do you run, and which city do you serve?':'Bonjour 👋 Je peux vous aider à choisir le bon forfait SOS Digital. Quel type d’entreprise avez-vous, et quelle ville desservez-vous?');return}if(chatState.step===0){chatState.step=1;addTypingThenReply(isEn?'Great. First, what service do you offer — HVAC, plumbing, roofing, electrical, or another home service?':'Parfait. D’abord, quel service offrez-vous — HVAC, plomberie, toiture, électricité ou un autre service résidentiel?');return}if(chatState.step===1){chatState.step=2;addTypingThenReply(isEn?'Good. What city or area do you want to target? For example: Montréal, Longueuil, Châteauguay, Brossard, or the South Shore.':'Très bien. Quelle ville ou quel secteur voulez-vous cibler? Par exemple : Montréal, Longueuil, Châteauguay, Brossard ou la Rive-Sud.');return}if(chatState.step===2){chatState.step=3;addTypingThenReply(isEn?'Perfect. Is your main goal more phone calls now, better Google visibility, or a full growth system with ads and follow-up?':'Parfait. Votre objectif principal est-il d’obtenir plus d’appels maintenant, une meilleure visibilité Google, ou un système complet avec publicités et suivis?');return}addTypingThenReply(recommendationReply(isEn))}
+function containsAny(text,words){return words.some(word=>text.includes(word))}
+function packageReply(isEn){return isEn?'SOS Digital has 3 packages: Local Starter at $74.99/month for Google presence, Contractor Scale at $219.99/month for stronger lead generation, and Market Authority at $379.99/month for multi-city growth. Most contractors who want calls should start with Contractor Scale.':'SOS Digital offre 3 forfaits : Local Starter à 74.99$/mois pour la présence Google, Contractor Scale à 219.99$/mois pour générer plus de leads, et Market Authority à 379.99$/mois pour une croissance multi-villes. Pour plus d’appels, Contractor Scale est généralement le meilleur départ.'}
+function recommendationReply(isEn){const service=chatState.service?` ${chatState.service}`:'';const city=chatState.city?` ${chatState.city}`:'';return isEn?`Based on what you shared${service||city?' for'+service+city:''}, I would recommend Contractor Scale at $219.99/month. It is the best fit when the goal is more qualified calls because it includes a conversion landing page, Google Ads setup, and instant SMS text-back. If you only need basic Google presence, Local Starter is enough. For multi-city growth, choose Market Authority.`:`Selon ce que vous avez partagé${service||city?' pour'+service+city:''}, je recommanderais Contractor Scale à 219.99$/mois. C’est le meilleur choix si l’objectif est d’obtenir plus d’appels qualifiés, car il inclut une landing page de conversion, Google Ads et le SMS Instant Text-Back. Si vous avez seulement besoin d’une présence Google de base, Local Starter suffit. Pour une croissance multi-villes, choisissez Market Authority.`}
+function contactReply(isEn){return isEn?'Absolutely. You can call SOS Digital directly at (438) 927-3462 or email info@sosdigital.ca. If you want, tell me your service and target city first, and I’ll suggest the best package before you call.':'Bien sûr. Vous pouvez appeler SOS Digital directement au (438) 927-3462 ou écrire à info@sosdigital.ca. Si vous voulez, dites-moi d’abord votre service et votre ville cible, et je vous recommande le meilleur forfait avant l’appel.'}
 
-function openChat() {
-  document.getElementById('chatWindow').classList.add('open');
-}
-
-const chatState = {
-  service: '',
-  city: '',
-  goal: '',
-  budget: '',
-  name: '',
-  step: 0
-};
-
-function quickChat(text) {
-  addMessage(text, 'user');
-  setTimeout(() => smartLocalReply(text), 450);
-}
-
-function sendChat() {
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (!text) return;
-  addMessage(text, 'user');
-  input.value = '';
-  setTimeout(() => smartLocalReply(text), 450);
-}
-
-function addMessage(text, who) {
-  const body = document.getElementById('chatBody');
-  const div = document.createElement('div');
-  div.className = 'msg ' + who;
-  div.textContent = text;
-  body.appendChild(div);
-  body.scrollTop = body.scrollHeight;
-}
-
-function addTypingThenReply(reply) {
-  const body = document.getElementById('chatBody');
-  const typing = document.createElement('div');
-  typing.className = 'msg bot';
-  typing.textContent = '...';
-  body.appendChild(typing);
-  body.scrollTop = body.scrollHeight;
-
-  setTimeout(() => {
-    typing.remove();
-    addMessage(reply, 'bot');
-  }, 650);
-}
-
-function smartLocalReply(text) {
-  const isEn = document.body.classList.contains('lang-en');
-  const t = text.toLowerCase();
-
-  if (containsAny(t, ['hvac', 'chauffage', 'climatisation', 'thermopompe'])) chatState.service = 'HVAC';
-  if (containsAny(t, ['plombier', 'plomberie', 'plumber'])) chatState.service = 'Plumbing';
-  if (containsAny(t, ['toiture', 'roof', 'roofer'])) chatState.service = 'Roofing';
-  if (containsAny(t, ['electric', 'électricien', 'electrician'])) chatState.service = 'Electrical';
-
-  if (containsAny(t, ['montreal', 'montréal'])) chatState.city = 'Montréal';
-  if (containsAny(t, ['longueuil'])) chatState.city = 'Longueuil';
-  if (containsAny(t, ['chateauguay', 'châteauguay'])) chatState.city = 'Châteauguay';
-  if (containsAny(t, ['brossard'])) chatState.city = 'Brossard';
-  if (containsAny(t, ['rive-sud', 'south shore'])) chatState.city = isEn ? 'South Shore' : 'Rive-Sud';
-
-  if (containsAny(t, ['appel', 'calls', 'call', 'leads', 'prospects'])) chatState.goal = isEn ? 'more qualified calls' : 'plus d’appels qualifiés';
-  if (containsAny(t, ['google', 'maps', 'seo', 'visibility', 'visibilité'])) chatState.goal = isEn ? 'more Google visibility' : 'plus de visibilité Google';
-  if (containsAny(t, ['ads', 'publicité', 'pub', 'meta'])) chatState.goal = isEn ? 'paid ads growth' : 'croissance avec publicité';
-
-  if (containsAny(t, ['budget', 'price', 'prix', 'cost', 'coût', 'combien', 'forfait', 'package', 'plan'])) {
-    addTypingThenReply(packageReply(isEn));
-    return;
-  }
-
-  if (containsAny(t, ['recommend', 'recommande', 'meilleur', 'best', 'which package', 'quel forfait'])) {
-    addTypingThenReply(recommendationReply(isEn));
-    return;
-  }
-
-  if (containsAny(t, ['talk', 'speak', 'parler', 'quelqu', 'human', 'humain', 'call me', 'appeler'])) {
-    addTypingThenReply(contactReply(isEn));
-    return;
-  }
-
-  if (containsAny(t, ['hello', 'hi', 'bonjour', 'salut', 'allo'])) {
-    addTypingThenReply(isEn
-      ? 'Hi 👋 I can help you choose the right SOS Digital package. What type of business do you run, and which city do you serve?'
-      : 'Bonjour 👋 Je peux vous aider à choisir le bon forfait SOS Digital. Quel type d’entreprise avez-vous, et quelle ville desservez-vous?');
-    return;
-  }
-
-  if (chatState.step === 0) {
-    chatState.step = 1;
-    addTypingThenReply(isEn
-      ? 'Great. First, what service do you offer — HVAC, plumbing, roofing, electrical, or another home service?'
-      : 'Parfait. D’abord, quel service offrez-vous — HVAC, plomberie, toiture, électricité ou un autre service résidentiel?');
-    return;
-  }
-
-  if (chatState.step === 1) {
-    chatState.step = 2;
-    addTypingThenReply(isEn
-      ? 'Good. What city or area do you want to target? For example: Montréal, Longueuil, Châteauguay, Brossard, or the South Shore.'
-      : 'Très bien. Quelle ville ou quel secteur voulez-vous cibler? Par exemple : Montréal, Longueuil, Châteauguay, Brossard ou la Rive-Sud.');
-    return;
-  }
-
-  if (chatState.step === 2) {
-    chatState.step = 3;
-    addTypingThenReply(isEn
-      ? 'Perfect. Is your main goal more phone calls now, better Google visibility, or a full growth system with ads and follow-up?'
-      : 'Parfait. Votre objectif principal est-il d’obtenir plus d’appels maintenant, une meilleure visibilité Google, ou un système complet avec publicités et suivis?');
-    return;
-  }
-
-  addTypingThenReply(recommendationReply(isEn));
-}
-
-function containsAny(text, words) {
-  return words.some(word => text.includes(word));
-}
-
-function packageReply(isEn) {
-  return isEn
-    ? 'SOS Digital has 3 packages: Local Starter at $74.99/month for Google presence, Contractor Scale at $219.99/month for stronger lead generation, and Market Authority at $379.99/month for multi-city growth. Most contractors who want calls should start with Contractor Scale.'
-    : 'SOS Digital offre 3 forfaits : Local Starter à 74.99$/mois pour la présence Google, Contractor Scale à 219.99$/mois pour générer plus de leads, et Market Authority à 379.99$/mois pour une croissance multi-villes. Pour plus d’appels, Contractor Scale est généralement le meilleur départ.';
-}
-
-function recommendationReply(isEn) {
-  const service = chatState.service ? ` ${chatState.service}` : '';
-  const city = chatState.city ? ` ${chatState.city}` : '';
-
-  return isEn
-    ? `Based on what you shared${service || city ? ' for' + service + city : ''}, I would recommend Contractor Scale at $219.99/month. It is the best fit when the goal is more qualified calls because it includes a conversion landing page, Google Ads setup, and instant SMS text-back. If you only need basic Google presence, Local Starter is enough. For multi-city growth, choose Market Authority.`
-    : `Selon ce que vous avez partagé${service || city ? ' pour' + service + city : ''}, je recommanderais Contractor Scale à 219.99$/mois. C’est le meilleur choix si l’objectif est d’obtenir plus d’appels qualifiés, car il inclut une landing page de conversion, Google Ads et le SMS Instant Text-Back. Si vous avez seulement besoin d’une présence Google de base, Local Starter suffit. Pour une croissance multi-villes, choisissez Market Authority.`;
-}
-
-function contactReply(isEn) {
-  return isEn
-    ? 'Absolutely. You can call SOS Digital directly at (438) 927-3462 or email info@sosdigital.ca. If you want, tell me your service and target city first, and I’ll suggest the best package before you call.'
-    : 'Bien sûr. Vous pouvez appeler SOS Digital directement au (438) 927-3462 ou écrire à info@sosdigital.ca. Si vous voulez, dites-moi d’abord votre service et votre ville cible, et je vous recommande le meilleur forfait avant l’appel.';
-}
+function createMatrixRain(){const rain=document.querySelector('.matrix-rain');if(!rain)return;const chars=['010101','101001','DATA','LEADS','SOS','GROWTH','LOCAL','AI','MAPS','CALLS'];for(let i=0;i<36;i++){const s=document.createElement('span');s.textContent=chars[i%chars.length];s.style.left=Math.random()*100+'%';s.style.animationDuration=8+Math.random()*14+'s';s.style.animationDelay=-(Math.random()*18)+'s';s.style.opacity=.25+Math.random()*.65;rain.appendChild(s)}}
+createMatrixRain();
 </script>
-
 </body>
 </html>
