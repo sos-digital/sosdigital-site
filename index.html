@@ -1197,12 +1197,18 @@ function openChat() {
   document.getElementById('chatWindow').classList.add('open');
 }
 
-const CHAT_ENDPOINT = '/.netlify/functions/sos-ai-chat';
-const chatHistory = [];
+const chatState = {
+  service: '',
+  city: '',
+  goal: '',
+  budget: '',
+  name: '',
+  step: 0
+};
 
 function quickChat(text) {
   addMessage(text, 'user');
-  askRealAI(text);
+  setTimeout(() => smartLocalReply(text), 450);
 }
 
 function sendChat() {
@@ -1211,7 +1217,7 @@ function sendChat() {
   if (!text) return;
   addMessage(text, 'user');
   input.value = '';
-  askRealAI(text);
+  setTimeout(() => smartLocalReply(text), 450);
 }
 
 function addMessage(text, who) {
@@ -1223,76 +1229,111 @@ function addMessage(text, who) {
   body.scrollTop = body.scrollHeight;
 }
 
-function addTyping() {
+function addTypingThenReply(reply) {
   const body = document.getElementById('chatBody');
-  const div = document.createElement('div');
-  div.className = 'msg bot';
-  div.id = 'typingMsg';
-  div.textContent = '...';
-  body.appendChild(div);
+  const typing = document.createElement('div');
+  typing.className = 'msg bot';
+  typing.textContent = '...';
+  body.appendChild(typing);
   body.scrollTop = body.scrollHeight;
+
+  setTimeout(() => {
+    typing.remove();
+    addMessage(reply, 'bot');
+  }, 650);
 }
 
-function removeTyping() {
-  const typing = document.getElementById('typingMsg');
-  if (typing) typing.remove();
-}
-
-async function askRealAI(text) {
+function smartLocalReply(text) {
   const isEn = document.body.classList.contains('lang-en');
-  chatHistory.push({ role: 'user', content: text });
-  addTyping();
-
-  try {
-    const response = await fetch(CHAT_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        message: text,
-        language: isEn ? 'English' : 'French',
-        history: chatHistory.slice(-10)
-      })
-    });
-
-    if (!response.ok) throw new Error('AI endpoint error');
-
-    const data = await response.json();
-    const reply = data.reply || fallbackReply(text, isEn);
-    removeTyping();
-    addMessage(reply, 'bot');
-    chatHistory.push({ role: 'assistant', content: reply });
-  } catch (error) {
-    removeTyping();
-    const reply = fallbackReply(text, isEn);
-    addMessage(reply, 'bot');
-    chatHistory.push({ role: 'assistant', content: reply });
-  }
-}
-
-function fallbackReply(text, isEn) {
   const t = text.toLowerCase();
 
-  if (t.includes('forfait') || t.includes('package') || t.includes('plan') || t.includes('recommand')) {
-    return isEn
-      ? 'For most growing contractors, I recommend Contractor Scale at $219.99/month because it includes the landing page, Google Ads setup, and instant SMS text-back. For direct help, call (438) 927-3462.'
-      : 'Pour la plupart des contracteurs en croissance, je recommande Contractor Scale à 219.99$/mois, car il inclut la landing page, Google Ads et le SMS Instant Text-Back. Pour une aide directe, appelez au (438) 927-3462.';
+  if (containsAny(t, ['hvac', 'chauffage', 'climatisation', 'thermopompe'])) chatState.service = 'HVAC';
+  if (containsAny(t, ['plombier', 'plomberie', 'plumber'])) chatState.service = 'Plumbing';
+  if (containsAny(t, ['toiture', 'roof', 'roofer'])) chatState.service = 'Roofing';
+  if (containsAny(t, ['electric', 'électricien', 'electrician'])) chatState.service = 'Electrical';
+
+  if (containsAny(t, ['montreal', 'montréal'])) chatState.city = 'Montréal';
+  if (containsAny(t, ['longueuil'])) chatState.city = 'Longueuil';
+  if (containsAny(t, ['chateauguay', 'châteauguay'])) chatState.city = 'Châteauguay';
+  if (containsAny(t, ['brossard'])) chatState.city = 'Brossard';
+  if (containsAny(t, ['rive-sud', 'south shore'])) chatState.city = isEn ? 'South Shore' : 'Rive-Sud';
+
+  if (containsAny(t, ['appel', 'calls', 'call', 'leads', 'prospects'])) chatState.goal = isEn ? 'more qualified calls' : 'plus d’appels qualifiés';
+  if (containsAny(t, ['google', 'maps', 'seo', 'visibility', 'visibilité'])) chatState.goal = isEn ? 'more Google visibility' : 'plus de visibilité Google';
+  if (containsAny(t, ['ads', 'publicité', 'pub', 'meta'])) chatState.goal = isEn ? 'paid ads growth' : 'croissance avec publicité';
+
+  if (containsAny(t, ['budget', 'price', 'prix', 'cost', 'coût', 'combien', 'forfait', 'package', 'plan'])) {
+    addTypingThenReply(packageReply(isEn));
+    return;
   }
 
-  if (t.includes('appel') || t.includes('call') || t.includes('lead')) {
-    return isEn
-      ? 'If your priority is more qualified calls, focus on Google visibility, a conversion landing page, and fast follow-up. Contractor Scale is usually the best fit.'
-      : 'Si votre priorité est d’obtenir plus d’appels qualifiés, il faut combiner visibilité Google, landing page de conversion et suivi rapide. Contractor Scale est généralement le meilleur choix.';
+  if (containsAny(t, ['recommend', 'recommande', 'meilleur', 'best', 'which package', 'quel forfait'])) {
+    addTypingThenReply(recommendationReply(isEn));
+    return;
   }
 
-  if (t.includes('parler') || t.includes('speak') || t.includes('someone') || t.includes('quelqu')) {
-    return isEn
-      ? 'You can call SOS Digital directly at (438) 927-3462 or email info@sosdigital.ca.'
-      : 'Vous pouvez appeler SOS Digital directement au (438) 927-3462 ou écrire à info@sosdigital.ca.';
+  if (containsAny(t, ['talk', 'speak', 'parler', 'quelqu', 'human', 'humain', 'call me', 'appeler'])) {
+    addTypingThenReply(contactReply(isEn));
+    return;
   }
+
+  if (containsAny(t, ['hello', 'hi', 'bonjour', 'salut', 'allo'])) {
+    addTypingThenReply(isEn
+      ? 'Hi 👋 I can help you choose the right SOS Digital package. What type of business do you run, and which city do you serve?'
+      : 'Bonjour 👋 Je peux vous aider à choisir le bon forfait SOS Digital. Quel type d’entreprise avez-vous, et quelle ville desservez-vous?');
+    return;
+  }
+
+  if (chatState.step === 0) {
+    chatState.step = 1;
+    addTypingThenReply(isEn
+      ? 'Great. First, what service do you offer — HVAC, plumbing, roofing, electrical, or another home service?'
+      : 'Parfait. D’abord, quel service offrez-vous — HVAC, plomberie, toiture, électricité ou un autre service résidentiel?');
+    return;
+  }
+
+  if (chatState.step === 1) {
+    chatState.step = 2;
+    addTypingThenReply(isEn
+      ? 'Good. What city or area do you want to target? For example: Montréal, Longueuil, Châteauguay, Brossard, or the South Shore.'
+      : 'Très bien. Quelle ville ou quel secteur voulez-vous cibler? Par exemple : Montréal, Longueuil, Châteauguay, Brossard ou la Rive-Sud.');
+    return;
+  }
+
+  if (chatState.step === 2) {
+    chatState.step = 3;
+    addTypingThenReply(isEn
+      ? 'Perfect. Is your main goal more phone calls now, better Google visibility, or a full growth system with ads and follow-up?'
+      : 'Parfait. Votre objectif principal est-il d’obtenir plus d’appels maintenant, une meilleure visibilité Google, ou un système complet avec publicités et suivis?');
+    return;
+  }
+
+  addTypingThenReply(recommendationReply(isEn));
+}
+
+function containsAny(text, words) {
+  return words.some(word => text.includes(word));
+}
+
+function packageReply(isEn) {
+  return isEn
+    ? 'SOS Digital has 3 packages: Local Starter at $74.99/month for Google presence, Contractor Scale at $219.99/month for stronger lead generation, and Market Authority at $379.99/month for multi-city growth. Most contractors who want calls should start with Contractor Scale.'
+    : 'SOS Digital offre 3 forfaits : Local Starter à 74.99$/mois pour la présence Google, Contractor Scale à 219.99$/mois pour générer plus de leads, et Market Authority à 379.99$/mois pour une croissance multi-villes. Pour plus d’appels, Contractor Scale est généralement le meilleur départ.';
+}
+
+function recommendationReply(isEn) {
+  const service = chatState.service ? ` ${chatState.service}` : '';
+  const city = chatState.city ? ` ${chatState.city}` : '';
 
   return isEn
-    ? 'Thanks. To recommend the best package, I would need your service type, target city, and whether you want more calls now or long-term visibility. You can also call (438) 927-3462.'
-    : 'Merci. Pour recommander le meilleur forfait, j’aurais besoin de connaître votre service, votre ville cible et si vous voulez plus d’appels maintenant ou plus de visibilité à long terme. Vous pouvez aussi appeler au (438) 927-3462.';
+    ? `Based on what you shared${service || city ? ' for' + service + city : ''}, I would recommend Contractor Scale at $219.99/month. It is the best fit when the goal is more qualified calls because it includes a conversion landing page, Google Ads setup, and instant SMS text-back. If you only need basic Google presence, Local Starter is enough. For multi-city growth, choose Market Authority.`
+    : `Selon ce que vous avez partagé${service || city ? ' pour' + service + city : ''}, je recommanderais Contractor Scale à 219.99$/mois. C’est le meilleur choix si l’objectif est d’obtenir plus d’appels qualifiés, car il inclut une landing page de conversion, Google Ads et le SMS Instant Text-Back. Si vous avez seulement besoin d’une présence Google de base, Local Starter suffit. Pour une croissance multi-villes, choisissez Market Authority.`;
+}
+
+function contactReply(isEn) {
+  return isEn
+    ? 'Absolutely. You can call SOS Digital directly at (438) 927-3462 or email info@sosdigital.ca. If you want, tell me your service and target city first, and I’ll suggest the best package before you call.'
+    : 'Bien sûr. Vous pouvez appeler SOS Digital directement au (438) 927-3462 ou écrire à info@sosdigital.ca. Si vous voulez, dites-moi d’abord votre service et votre ville cible, et je vous recommande le meilleur forfait avant l’appel.';
 }
 </script>
 
