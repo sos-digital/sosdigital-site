@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SOS Digital — Client Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+:root {
+  --red:      #e8303a;
+  --red2:     #ff4d55;
+  --red-dim:  rgba(232,48,58,0.10);
+  --red-brd:  rgba(232,48,58,0.22);
+  --ink:      #09090c;
+  --ink2:     #0f0f14;
+  --ink3:     #161620;
+  --ink4:     #1e1e2a;
+  --rule:     rgba(255,255,255,0.055);
+  --txt:      #edeae2;
+  --dim:      #636375;
+  --dim2:     #8f8fa8;
+  --green:    #2dd98f;
+  --blue:     #4e9eff;
+  --amber:    #f5a623;
+  --display:  'Cabinet Grotesk', sans-serif;
+  --body:     'Instrument Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  background: var(--ink);
+  color: var(--txt);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: var(--body); }
+input, select, textarea { font-family: var(--body); }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+
+/* ═══════════════════════════════════════
+   SCREENS
+═══════════════════════════════════════ */
+.screen { display: none; }
+.screen.active { display: flex; }
+
+/* ═══════════════════════════════════════
+   LOGIN SCREEN
+═══════════════════════════════════════ */
+#screen-login {
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.login-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(232,48,58,0.09) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(78,158,255,0.05) 0%, transparent 60%);
+}
+.login-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 80%);
+}
+.login-box {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 420px;
+  padding: 0 20px;
+  animation: fadeUp .5s ease both;
+}
+.login-logo {
+  text-align: center; margin-bottom: 36px;
+}
+.login-logo .sos-word {
+  font-family: var(--display);
+  font-size: 34px; font-weight: 900;
+  letter-spacing: -1px;
+}
+.login-logo .sos-word .r { color: var(--red); }
+.login-logo .tagline {
+  font-size: 12px; color: var(--dim2);
+  margin-top: 4px; letter-spacing: 1.5px; text-transform: uppercase;
+}
+
+.login-card {
+  background: var(--ink2);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: 36px 32px;
+  backdrop-filter: blur(20px);
+}
+.login-card h2 {
+  font-family: var(--display);
+  font-size: 22px; font-weight: 800;
+  margin-bottom: 6px; letter-spacing: -.3px;
+}
+.login-card .sub {
+  font-size: 13px; color: var(--dim2);
+  margin-bottom: 28px;
+}
+
+.field { margin-bottom: 16px; }
+.field label {
+  display: block; font-size: 11px; font-weight: 600;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--dim2); margin-bottom: 7px;
+}
+.field input {
+  width: 100%; background: var(--ink3);
+  border: 1px solid var(--rule); border-radius: 8px;
+  padding: 12px 14px; color: var(--txt);
+  font-size: 14px; outline: none;
+  transition: border-color .2s;
+}
+.field input:focus { border-color: var(--red); }
+
+.login-btn {
+  width: 100%; padding: 13px;
+  background: var(--red); color: #fff;
+  font-family: var(--display); font-weight: 800; font-size: 15px;
+  border: none; border-radius: 8px;
+  transition: background .2s, transform .15s;
+  margin-top: 4px; letter-spacing: .2px;
+}
+.login-btn:hover { background: var(--red2); transform: translateY(-1px); }
+
+.login-demo {
+  margin-top: 18px; text-align: center;
+  font-size: 12px; color: var(--dim);
+}
+.login-demo span { color: var(--dim2); }
+
+.login-err {
+  background: rgba(232,48,58,.1);
+  border: 1px solid var(--red-brd);
+  border-radius: 7px; padding: 10px 14px;
+  font-size: 13px; color: var(--red2);
+  margin-bottom: 14px; display: none;
+}
+
+/* ═══════════════════════════════════════
+   PORTAL LAYOUT
+═══════════════════════════════════════ */
+#screen-portal {
+  flex-direction: row;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 230px; flex-shrink: 0;
+  background: var(--ink2);
+  border-right: 1px solid var(--rule);
+  display: flex; flex-direction: column;
+  position: sticky; top: 0; height: 100vh;
+  overflow-y: auto;
+}
+.sidebar-logo {
+  padding: 22px 22px 18px;
+  border-bottom: 1px solid var(--rule);
+}
+.sidebar-logo .wordmark {
+  font-family: var(--display);
+  font-size: 19px; font-weight: 900;
+  letter-spacing: -.3px;
+}
+.sidebar-logo .wordmark .r { color: var(--red); }
+.sidebar-logo .portal-badge {
+  font-size: 10px; color: var(--dim);
+  letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px;
+}
+
+.sidebar-user {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; gap: 10px;
+}
+.user-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--red), #ff8c42);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 13px; font-weight: 800;
+  color: #fff; flex-shrink: 0;
+}
+.user-name { font-size: 13px; font-weight: 600; }
+.user-plan {
+  font-size: 10px; color: var(--green);
+  background: rgba(45,217,143,.1);
+  border: 1px solid rgba(45,217,143,.2);
+  border-radius: 3px; padding: 1px 6px;
+  letter-spacing: 1px; text-transform: uppercase;
+  display: inline-block; margin-top: 2px;
+}
+
+.sidebar-nav { padding: 14px 10px; flex: 1; }
+.nav-section-label {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--dim);
+  padding: 0 10px; margin: 12px 0 6px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: 7px;
+  font-size: 13px; font-weight: 500; color: var(--dim2);
+  transition: all .15s; cursor: pointer;
+  border: 1px solid transparent;
+  margin-bottom: 2px;
+}
+.nav-item:hover { background: var(--ink3); color: var(--txt); }
+.nav-item.active {
+  background: var(--red-dim); color: var(--txt);
+  border-color: var(--red-brd);
+}
+.nav-item .ni { font-size: 15px; flex-shrink: 0; }
+
+.sidebar-footer {
+  padding: 14px 10px;
+  border-top: 1px solid var(--rule);
+}
+.logout-btn {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 9px 12px; border-radius: 7px;
+  font-size: 13px; font-weight: 500; color: var(--dim);
+  background: none; border: none;
+  transition: all .15s;
+}
+.logout-btn:hover { color: var(--red); background: var(--red-dim); }
+
+/* MAIN CONTENT */
+.main {
+  flex: 1; overflow-y: auto;
+  background: var(--ink);
+}
+.topbar {
+  height: 60px; padding: 0 32px;
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  background: rgba(9,9,12,0.7);
+  backdrop-filter: blur(12px);
+  position: sticky; top: 0; z-index: 10;
+}
+.topbar-title {
+  font-family: var(--display);
+  font-size: 16px; font-weight: 800; letter-spacing: -.2px;
+}
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.topbar-badge {
+  font-size: 11px; color: var(--dim2);
+  background: var(--ink3); border: 1px solid var(--rule);
+  border-radius: 100px; padding: 4px 12px;
+}
+
+/* PAGES */
+.page { display: none; padding: 32px; }
+.page.active { display: block; }
+
+/* ═══════════════════════════════════════
+   PAGE: DASHBOARD
+═══════════════════════════════════════ */
+.page-heading {
+  margin-bottom: 28px;
+}
+.page-heading h1 {
+  font-family: var(--display);
+  font-size: 26px; font-weight: 900; letter-spacing: -.5px;
+  margin-bottom: 4px;
+}
+.page-heading p { font-size: 14px; color: var(--dim2); }
+
+/* KPI row */
+.kpi-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 12px; margin-bottom: 24px;
+}
+.kpi {
+  background: var(--ink2); border: 1px solid var(--rule);
+  border-radius: 12px; padding: 20px 20px 18px;
+  transition: border-color .2s, transform .2s;
+}
+.kpi:hover { border-color: var(--red-brd); transform: translateY(-2px); }
+.kpi-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--dim); margin-bottom: 10px;
+}
+.kpi-val {
+  font-family: var(--display);
+  font-size: 32px; font-weight: 900;
+  letter-spacing: -1.5px; line-height: 1;
+  margin-bottom: 6px;
+}
+.kpi-delta {
+  font-size: 12px; display: flex; align-items: center; gap: 4px;
+}
+.kpi-delta.up { color: var(--green); }
+.kpi-delta.down { color: var(--red); }
+.kpi-delta.neutral { color: var(--dim2); }
+
+/* Charts row */
+.charts-row {
+  display: grid; grid-template-columns: 1.6fr 1fr;
+  gap: 14px; margin-bottom: 24px;
+}
+.card {
+  background: var(--ink2); border: 1px solid var(--rule);
+  border-radius: 12px; padding: 22px 24px;
+}
+.card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px;
+}
+.card-title {
+  font-family: var(--display);
+  font-size: 14px; font-weight: 800; letter-spacing: -.2px;
+}
+.card-badge {
+  font-size: 10px; color: var(--dim2);
+  background: var(--ink3); border: 1px solid var(--rule);
+  border-radius: 4px; padding: 3px 9px; letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Mini bar chart */
+.bar-chart {
+  display: flex; align-items: flex-end;
+  gap: 6px; height: 100px;
+}
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.bar {
+  width: 100%; border-radius: 4px 4px 0 0;
+  transition: opacity .2s;
+  min-height: 4px;
+}
+.bar:hover { opacity: .75; }
+.bar-lbl { font-size: 9px; color: var(--dim); }
+
+/* Donut chart placeholder */
+.donut-wrap {
+  display: flex; align-items: center; gap: 20px;
+}
+.donut {
+  width: 80px; height: 80px; flex-shrink: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--green) 0% 38%,
+    var(--blue)  38% 62%,
+    var(--amber) 62% 79%,
+    var(--red)   79% 100%
+  );
+  position: relative;
+}
+.donut::after {
+  content: ''; position: absolute;
+  inset: 18px; border-radius: 50%;
+  background: var(--ink2);
+}
+.donut-legend { display: flex; flex-direction: column; gap: 7px; }
+.legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--dim2); }
+.legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+/* Bottom row */
+.bottom-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Activity list */
+.activity-list { display: flex; flex-direction: column; gap: 0; }
+.activity-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.activity-item:last-child { border-bottom: none; }
+.act-icon {
+  width: 30px; height: 30px; border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+}
+.act-text { font-size: 13px; line-height: 1.4; }
+.act-time { font-size: 11px; color: var(--dim); margin-top: 2px; }
+
+/* Next actions */
+.action-list { display: flex; flex-direction: column; gap: 8px; }
+.action-item {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--ink3); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 12px 14px;
+  transition: border-color .2s;
+}
+.action-item:hover { border-color: var(--red-brd); }
+.action-num {
+  width: 22px; height: 22px; border-radius: 5px;
+  background: var(--red-dim); border: 1px solid var(--red-brd);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: var(--red);
+  flex-shrink: 0;
+}
+.action-text { font-size: 13px; flex: 1; }
+.action-status {
+  font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 3px; font-weight: 600;
+}
+.status-done { color: var(--green); background: rgba(45,217,143,.1); }
+.status-active { color: var(--amber); background: rgba(245,166,35,.1); }
+.status-pending { color: var(--dim2); background: var(--ink4); }
+
+/* ═══════════════════════════════════════
+   PAGE: PERFORMANCE
+═══════════════════════════════════════ */
+.perf-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px; margin-bottom: 24px;
+}
+.metric-block {
+  background: var(--ink2); border: 1px solid var(--rule);
+  border-radius: 12px; padding: 24px;
+}
+.metric-title {
+  font-family: var(--display);
+  font-size: 13px; font-weight: 700; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.progress-row { margin-bottom: 14px; }
+.progress-label {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--dim2); margin-bottom: 6px;
+}
+.progress-label span:last-child { color: var(--txt); font-weight: 600; }
+.progress-bar {
+  height: 6px; background: var(--ink4);
+  border-radius: 100px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 100px;
+  transition: width 1s ease;
+}
+
+/* Google rank table */
+.rank-table { width: 100%; border-collapse: collapse; }
+.rank-table th {
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--dim);
+  padding: 0 12px 10px; text-align: left;
+}
+.rank-table td {
+  padding: 10px 12px; font-size: 13px;
+  border-top: 1px solid var(--rule);
+}
+.rank-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 5px;
+  font-size: 11px; font-weight: 800; font-family: var(--display);
+}
+.rank-1 { background: rgba(45,217,143,.15); color: var(--green); }
+.rank-2 { background: rgba(78,158,255,.15); color: var(--blue); }
+.rank-3 { background: rgba(245,166,35,.15); color: var(--amber); }
+.rank-other { background: var(--ink4); color: var(--dim2); }
+
+.trend-up { color: var(--green); font-size: 12px; }
+.trend-down { color: var(--red); font-size: 12px; }
+.trend-same { color: var(--dim); font-size: 12px; }
+
+/* ═══════════════════════════════════════
+   PAGE: SUBSCRIPTION
+═══════════════════════════════════════ */
+.sub-current {
+  background: linear-gradient(135deg, rgba(232,48,58,.08), rgba(232,48,58,.03));
+  border: 1px solid var(--red-brd);
+  border-radius: 14px; padding: 28px;
+  margin-bottom: 24px;
+  display: flex; justify-content: space-between;
+  align-items: flex-start; flex-wrap: wrap; gap: 20px;
+}
+.sub-plan-name {
+  font-family: var(--display);
+  font-size: 22px; font-weight: 900; letter-spacing: -.5px;
+}
+.sub-price {
+  font-family: var(--display);
+  font-size: 38px; font-weight: 900; letter-spacing: -1.5px;
+  color: var(--red); line-height: 1; margin: 8px 0 4px;
+}
+.sub-price sup { font-size: 18px; vertical-align: super; }
+.sub-price sub { font-size: 15px; color: var(--dim2); }
+.sub-renewal { font-size: 13px; color: var(--dim2); }
+.sub-renewal strong { color: var(--txt); }
+.sub-actions { display: flex; flex-direction: column; gap: 8px; }
+.sub-btn {
+  padding: 10px 20px; border-radius: 7px;
+  font-size: 13px; font-weight: 600; border: none;
+  transition: all .2s; min-width: 160px; text-align: center;
+}
+.sub-btn.upgrade { background: var(--red); color: #fff; }
+.sub-btn.upgrade:hover { background: var(--red2); }
+.sub-btn.cancel { background: var(--ink4); color: var(--dim2); border: 1px solid var(--rule); }
+.sub-btn.cancel:hover { color: var(--red); border-color: var(--red-brd); }
+
+.plan-compare {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 12px; margin-bottom: 24px;
+}
+.plan-card {
+  background: var(--ink2); border: 1px solid var(--rule);
+  border-radius: 12px; padding: 24px 20px;
+  position: relative; transition: transform .2s;
+}
+.plan-card:hover { transform: translateY(-3px); }
+.plan-card.current-plan { border-color: var(--red); }
+.current-badge {
+  position: absolute; top: -11px; left: 18px;
+  background: var(--red); color: #fff;
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 3px 10px; border-radius: 3px;
+}
+.plan-name {
+  font-family: var(--display);
+  font-size: 15px; font-weight: 800; margin-bottom: 6px;
+}
+.plan-amt {
+  font-family: var(--display);
+  font-size: 28px; font-weight: 900; letter-spacing: -1px;
+  color: var(--txt); margin-bottom: 16px;
+}
+.plan-amt .mo { font-size: 13px; font-weight: 400; color: var(--dim2); }
+.plan-feats { display: flex; flex-direction: column; gap: 8px; }
+.plan-feat { display: flex; gap: 8px; font-size: 12px; color: #ccc; }
+.feat-check { color: var(--green); flex-shrink: 0; }
+.feat-x { color: var(--dim); flex-shrink: 0; }
+
+/* Invoice table */
+.invoice-table { width: 100%; border-collapse: collapse; }
+.invoice-table th {
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--dim);
+  padding: 0 14px 10px; text-align: left;
+}
+.invoice-table td {
+  padding: 12px 14px; font-size: 13px;
+  border-top: 1px solid var(--rule);
+}
+.inv-status {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 3px;
+}
+.inv-paid { background: rgba(45,217,143,.1); color: var(--green); }
+.inv-pending { background: rgba(245,166,35,.1); color: var(--amber); }
+
+/* ═══════════════════════════════════════
+   PAGE: PROFILE
+═══════════════════════════════════════ */
+.profile-layout {
+  display: grid; grid-template-columns: 1fr 1.4fr;
+  gap: 20px; align-items: start;
+}
+.profile-card {
+  background: var(--ink2); border: 1px solid var(--rule);
+  border-radius: 12px; padding: 28px 24px; text-align: center;
+}
+.profile-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--red), #ff8c42);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 26px; font-weight: 900;
+  color: #fff; margin: 0 auto 14px;
+}
+.profile-name {
+  font-family: var(--display);
+  font-size: 20px; font-weight: 900; letter-spacing: -.3px;
+  margin-bottom: 4px;
+}
+.profile-email { font-size: 13px; color: var(--dim2); margin-bottom: 16px; }
+.profile-tags { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+.ptag {
+  font-size: 10px; font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase; padding: 3px 10px; border-radius: 3px;
+}
+.ptag-plan { background: var(--red-dim); color: var(--red2); border: 1px solid var(--red-brd); }
+.ptag-city { background: var(--ink4); color: var(--dim2); border: 1px solid var(--rule); }
+
+.profile-stats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-top: 20px;
+}
+.pstat {
+  background: var(--ink3); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 14px;
+  text-align: center;
+}
+.pstat-val {
+  font-family: var(--display);
+  font-size: 22px; font-weight: 900; color: var(--red);
+  letter-spacing: -.5px;
+}
+.pstat-lbl { font-size: 11px; color: var(--dim); margin-top: 2px; }
+
+.profile-form { background: var(--ink2); border: 1px solid var(--rule); border-radius: 12px; padding: 28px; }
+.form-section-title {
+  font-family: var(--display);
+  font-size: 15px; font-weight: 800; margin-bottom: 18px;
+  padding-bottom: 12px; border-bottom: 1px solid var(--rule);
+}
+.pf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.pf { margin-bottom: 16px; }
+.pf label {
+  display: block; font-size: 10.5px; font-weight: 700;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--dim); margin-bottom: 7px;
+}
+.pf input, .pf select {
+  width: 100%; background: var(--ink3);
+  border: 1px solid var(--rule); border-radius: 7px;
+  padding: 11px 13px; color: var(--txt);
+  font-size: 14px; outline: none;
+  transition: border-color .2s;
+}
+.pf input:focus, .pf select:focus { border-color: var(--red); }
+.save-btn {
+  background: var(--red); color: #fff;
+  border: none; border-radius: 7px;
+  padding: 11px 24px; font-size: 13px; font-weight: 700;
+  font-family: var(--display); letter-spacing: .2px;
+  transition: background .2s;
+}
+.save-btn:hover { background: var(--red2); }
+
+.notif-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 0; border-bottom: 1px solid var(--rule);
+}
+.notif-row:last-child { border-bottom: none; }
+.notif-label { font-size: 13px; }
+.notif-sub { font-size: 12px; color: var(--dim); margin-top: 1px; }
+.toggle {
+  width: 38px; height: 22px; border-radius: 11px;
+  background: var(--ink4); border: 1px solid var(--rule);
+  position: relative; cursor: pointer; transition: background .2s;
+  flex-shrink: 0;
+}
+.toggle.on { background: var(--red); border-color: var(--red); }
+.toggle::after {
+  content: ''; position: absolute;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: #fff; top: 2px; left: 2px;
+  transition: transform .2s;
+}
+.toggle.on::after { transform: translateX(16px); }
+
+/* ═══════════════════════════════════════
+   SHARED
+═══════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate { animation: fadeUp .4s ease both; }
+
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .kpi-row { grid-template-columns: 1fr 1fr; }
+  .charts-row { grid-template-columns: 1fr; }
+  .bottom-row { grid-template-columns: 1fr; }
+  .perf-grid { grid-template-columns: 1fr; }
+  .plan-compare { grid-template-columns: 1fr; }
+  .profile-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .page { padding: 20px 16px; }
+  .kpi-row { grid-template-columns: 1fr 1fr; }
+  .pf-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     LOGIN SCREEN
+══════════════════════════════════ -->
+<div id="screen-login" class="screen active">
+  <div class="login-bg"></div>
+  <div class="login-grid"></div>
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="sos-word"><span class="r">SOS</span>Digital</div>
+      <div class="tagline">Client Portal · Portail Client</div>
+    </div>
+    <div class="login-card">
+      <h2>Bienvenue / Welcome</h2>
+      <p class="sub">Connectez-vous à votre espace client · Sign in to your account</p>
+      <div class="login-err" id="login-err">Email ou mot de passe incorrect · Incorrect email or password</div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="login-email" placeholder="vous@entreprise.com" />
+      </div>
+      <div class="field">
+        <label>Mot de passe · Password</label>
+        <input type="password" id="login-pass" placeholder="••••••••" />
+      </div>
+      <button class="login-btn" onclick="doLogin()">Se connecter · Sign in →</button>
+      <p class="login-demo">
+        Démo: <span>client@demo.com</span> / <span>demo123</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PORTAL SCREEN
+══════════════════════════════════ -->
+<div id="screen-portal" class="screen">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="wordmark"><span class="r">SOS</span>Digital</div>
+      <div class="portal-badge">Portail Client</div>
+    </div>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="sb-avatar">JT</div>
+      <div>
+        <div class="user-name" id="sb-name">Jean Tremblay</div>
+        <div class="user-plan">Croissance</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Vue d'ensemble</div>
+      <div class="nav-item active" onclick="showPage('dashboard', this)">
+        <span class="ni">📊</span> Tableau de bord
+      </div>
+      <div class="nav-item" onclick="showPage('performance', this)">
+        <span class="ni">📈</span> Performance
+      </div>
+      <div class="nav-section-label">Mon compte</div>
+      <div class="nav-item" onclick="showPage('subscription', this)">
+        <span class="ni">💳</span> Abonnement
+      </div>
+      <div class="nav-item" onclick="showPage('profile', this)">
+        <span class="ni">👤</span> Mon profil
+      </div>
+      <div class="nav-section-label">Support</div>
+      <div class="nav-item" onclick="showPage('messages', this)">
+        <span class="ni">💬</span> Messages
+        <span style="margin-left:auto;background:var(--red);color:#fff;font-size:10px;font-weight:700;border-radius:100px;padding:1px 7px">2</span>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="doLogout()">
+        <span>🚪</span> Déconnexion
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="topbar-title">Tableau de bord</div>
+      <div class="topbar-right">
+        <div class="topbar-badge" id="topbar-date"></div>
+        <div class="user-avatar" style="width:32px;height:32px;font-size:12px" id="tb-avatar">JT</div>
+      </div>
+    </div>
+
+    <!-- ─── DASHBOARD ─── -->
+    <div class="page active animate" id="page-dashboard">
+      <div class="page-heading">
+        <h1>Bonjour, <span id="dash-name">Jean</span> 👋</h1>
+        <p>Voici un aperçu de votre performance ce mois-ci · Here's your performance overview this month</p>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">Appels reçus · Calls</div>
+          <div class="kpi-val" style="color:var(--green)">34</div>
+          <div class="kpi-delta up">↑ 12 vs mois dernier</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Vues Google</div>
+          <div class="kpi-val" style="color:var(--blue)">1 284</div>
+          <div class="kpi-delta up">↑ 38% ce mois</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Posts publiés</div>
+          <div class="kpi-val" style="color:var(--amber)">16</div>
+          <div class="kpi-delta neutral">→ Sur 16 prévus</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Note Google</div>
+          <div class="kpi-val" style="color:var(--red)">4.8★</div>
+          <div class="kpi-delta up">↑ 2 avis ce mois</div>
+        </div>
+      </div>
+
+      <div class="charts-row">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Vues Google — 6 derniers mois</span>
+            <span class="card-badge">Google Business</span>
+          </div>
+          <div class="bar-chart">
+            <div class="bar-col"><div class="bar" style="height:35%;background:var(--ink4)"></div><div class="bar-lbl">Avr</div></div>
+            <div class="bar-col"><div class="bar" style="height:52%;background:var(--ink4)"></div><div class="bar-lbl">Mai</div></div>
+            <div class="bar-col"><div class="bar" style="height:48%;background:var(--ink4)"></div><div class="bar-lbl">Jun</div></div>
+            <div class="bar-col"><div class="bar" style="height:63%;background:var(--ink4)"></div><div class="bar-lbl">Jul</div></div>
+            <div class="bar-col"><div class="bar" style="height:75%;background:rgba(232,48,58,.4)"></div><div class="bar-lbl">Aoû</div></div>
+            <div class="bar-col"><div class="bar" style="height:100%;background:var(--red)"></div><div class="bar-lbl">Sep</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Sources de trafic</span>
+            <span class="card-badge">Ce mois</span>
+          </div>
+          <div class="donut-wrap">
+            <div class="donut"></div>
+            <div class="donut-legend">
+              <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Google (38%)</div>
+              <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Référencement (24%)</div>
+              <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div>Réseaux sociaux (17%)</div>
+              <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Direct (21%)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-row">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Activité récente</span>
+          </div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="act-icon" style="background:rgba(45,217,143,.1)">📝</div>
+              <div><div class="act-text">16 publications Instagram & Facebook publiées</div><div class="act-time">Il y a 2 jours</div></div>
+            </div>
+            <div class="activity-item">
+              <div class="act-icon" style="background:rgba(78,158,255,.1)">⭐</div>
+              <div><div class="act-text">Nouvel avis 5★ répondu sur Google</div><div class="act-time">Il y a 4 jours</div></div>
+            </div>
+            <div class="activity-item">
+              <div class="act-icon" style="background:rgba(245,166,35,.1)">🔧</div>
+              <div><div class="act-text">Fiche Google Business mise à jour (FR+EN)</div><div class="act-time">Il y a 6 jours</div></div>
+            </div>
+            <div class="activity-item">
+              <div class="act-icon" style="background:rgba(232,48,58,.1)">📊</div>
+              <div><div class="act-text">Rapport mensuel d'août envoyé par email</div><div class="act-time">Il y a 8 jours</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Ce mois — Plan d'action</span>
+          </div>
+          <div class="action-list">
+            <div class="action-item">
+              <div class="action-num">1</div>
+              <div class="action-text">Optimisation Google Business</div>
+              <span class="action-status status-done">Fait</span>
+            </div>
+            <div class="action-item">
+              <div class="action-num">2</div>
+              <div class="action-text">Publications réseaux sociaux (16)</div>
+              <span class="action-status status-done">Fait</span>
+            </div>
+            <div class="action-item">
+              <div class="action-num">3</div>
+              <div class="action-text">Article de blogue SEO</div>
+              <span class="action-status status-active">En cours</span>
+            </div>
+            <div class="action-item">
+              <div class="action-num">4</div>
+              <div class="action-text">Campagne Google Ads automne</div>
+              <span class="action-status status-pending">À venir</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── PERFORMANCE ─── -->
+    <div class="page animate" id="page-performance">
+      <div class="page-heading">
+        <h1>Performance 📈</h1>
+        <p>Résultats détaillés de votre présence en ligne · Detailed online presence results</p>
+      </div>
+
+      <div class="perf-grid">
+        <div class="metric-block">
+          <div class="metric-title">📍 Référencement Google Local</div>
+          <div class="progress-row">
+            <div class="progress-label"><span>Vues fiche Google</span><span>1 284 / mois</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:85%;background:var(--green)"></div></div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-label"><span>Clics vers votre site</span><span>312 / mois</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:65%;background:var(--blue)"></div></div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-label"><span>Appels depuis Google</span><span>34 / mois</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:72%;background:var(--amber)"></div></div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-label"><span>Demandes de direction</span><span>18 / mois</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:42%;background:var(--red)"></div></div>
+          </div>
+        </div>
+        <div class="metric-block">
+          <div class="metric-title">📱 Réseaux Sociaux</div>
+          <div class="progress-row">
+            <div class="progress-label"><span>Portée Instagram</span><span>2 840</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:78%;background:var(--green)"></div></div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-label"><span>Portée Facebook</span><span>1 490</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:55%;background:var(--blue)"></div></div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-label"><span>Interactions totales</span><span>387</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:60%;background:var(--amber)"></div></div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-label"><span>Nouveaux abonnés</span><span>+43</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:48%;background:var(--red)"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-header">
+          <span class="card-title">🔍 Positionnement Google — Mots-clés locaux</span>
+          <span class="card-badge">Septembre 2025</span>
+        </div>
+        <table class="rank-table">
+          <thead>
+            <tr>
+              <th>Mot-clé · Keyword</th>
+              <th>Position</th>
+              <th>Évolution</th>
+              <th>Vues/mois</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>plombier châteauguay</td>
+              <td><span class="rank-badge rank-1">#1</span></td>
+              <td class="trend-up">↑ +3</td>
+              <td>340</td>
+            </tr>
+            <tr>
+              <td>plombier rive-sud</td>
+              <td><span class="rank-badge rank-2">#2</span></td>
+              <td class="trend-up">↑ +5</td>
+              <td>210</td>
+            </tr>
+            <tr>
+              <td>réparation plomberie candiac</td>
+              <td><span class="rank-badge rank-3">#3</span></td>
+              <td class="trend-same">→ =</td>
+              <td>120</td>
+            </tr>
+            <tr>
+              <td>plumber south shore montreal</td>
+              <td><span class="rank-badge rank-other">#5</span></td>
+              <td class="trend-up">↑ +2</td>
+              <td>85</td>
+            </tr>
+            <tr>
+              <td>urgence plomberie châteauguay</td>
+              <td><span class="rank-badge rank-other">#4</span></td>
+              <td class="trend-down">↓ -1</td>
+              <td>65</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ─── SUBSCRIPTION ─── -->
+    <div class="page animate" id="page-subscription">
+      <div class="page-heading">
+        <h1>Abonnement 💳</h1>
+        <p>Gérez votre forfait et consultez vos factures · Manage your plan and view invoices</p>
+      </div>
+
+      <div class="sub-current">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:8px">Forfait actuel · Current plan</div>
+          <div class="sub-plan-name">Croissance · Growth</div>
+          <div class="sub-price"><sup>$</sup>597<sub>/mois</sub></div>
+          <div class="sub-renewal">Prochain renouvellement · Next renewal: <strong>1er octobre 2025</strong></div>
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+            <span style="font-size:11px;color:var(--green);background:rgba(45,217,143,.1);border:1px solid rgba(45,217,143,.2);border-radius:3px;padding:3px 10px;letter-spacing:1px">✓ ACTIF</span>
+            <span style="font-size:11px;color:var(--blue);background:rgba(78,158,255,.1);border:1px solid rgba(78,158,255,.2);border-radius:3px;padding:3px 10px;letter-spacing:1px">🔄 RENOUVELLEMENT AUTO</span>
+          </div>
+        </div>
+        <div class="sub-actions">
+          <button class="sub-btn upgrade">⬆️ Passer à Domination</button>
+          <button class="sub-btn cancel">Annuler l'abonnement</button>
+        </div>
+      </div>
+
+      <div style="font-family:var(--display);font-size:15px;font-weight:800;margin-bottom:14px">Comparer les forfaits · Compare plans</div>
+      <div class="plan-compare" style="margin-bottom:24px">
+        <div class="plan-card">
+          <div class="plan-name">Démarrage</div>
+          <div class="plan-amt">$397<span class="mo">/mo</span></div>
+          <div class="plan-feats">
+            <div class="plan-feat"><span class="feat-check">✓</span>Google Business FR+EN</div>
+            <div class="plan-feat"><span class="feat-check">✓</span>8 posts / mois</div>
+            <div class="plan-feat"><span class="feat-check">✓</span>Réponses avis Google</div>
+            <div class="plan-feat"><span class="feat-x">✗</span>Site web SEO</div>
+            <div class="plan-feat"><span class="feat-x">✗</span>Google Ads</div>
+          </div>
+        </div>
+        <div class="plan-card current-plan">
+          <div class="current-badge">Votre forfait</div>
+          <div class="plan-name" style="margin-top:10px">Croissance</div>
+          <div class="plan-amt" style="color:var(--red)">$597<span class="mo">/mo</span></div>
+          <div class="plan-feats">
+            <div class="plan-feat"><span class="feat-check">✓</span>Tout du Démarrage</div>
+            <div class="plan-feat"><span class="feat-check">✓</span>Site web 5 pages SEO</div>
+            <div class="plan-feat"><span class="feat-check">✓</span>16 posts / mois</div>
+            <div class="plan-feat"><span class="feat-check">✓</span>Article blogue mensuel</div>
+            <div class="plan-feat"><span class="feat-check">✓</span>Gestion Google Ads</div>
+          </div>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">Domination</div>
+          <div class="plan-amt">$997<span class="mo">/mo</span></div>
+          <div class="plan-feats">
+            <div class="plan-feat"><span class="feat-check">✓</span>Tout du Croissance</div>
+            <div class="plan-feat"><span class="feat-check">✓</span>Tunnel de vente complet</div>
+            <div class="plan-feat"><span class="feat-check">✓</span>FB + Google Ads gérés</div>
+            <div class="plan-feat"><span class="feat-check">✓</span>Rapport concurrents</div>
+            <div class="plan-feat"><span class="feat-check">✓</span>Priorité même jour</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Historique des factures · Invoice History</span>
+        </div>
+        <table class="invoice-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Montant</th>
+              <th>Statut</th>
+              <th>Facture</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1 Sep 2025</td>
+              <td>Forfait Croissance — Septembre</td>
+              <td>$597.00</td>
+              <td><span class="inv-status inv-paid">Payé</span></td>
+              <td><a href="#" style="color:var(--blue);font-size:12px">Télécharger</a></td>
+            </tr>
+            <tr>
+              <td>1 Aoû 2025</td>
+              <td>Forfait Croissance — Août</td>
+              <td>$597.00</td>
+              <td><span class="inv-status inv-paid">Payé</span></td>
+              <td><a href="#" style="color:var(--blue);font-size:12px">Télécharger</a></td>
+            </tr>
+            <tr>
+              <td>1 Jul 2025</td>
+              <td>Forfait Croissance — Juillet</td>
+              <td>$597.00</td>
+              <td><span class="inv-status inv-paid">Payé</span></td>
+              <td><a href="#" style="color:var(--blue);font-size:12px">Télécharger</a></td>
+            </tr>
+            <tr>
+              <td>1 Oct 2025</td>
+              <td>Forfait Croissance — Octobre</td>
+              <td>$597.00</td>
+              <td><span class="inv-status inv-pending">À venir</span></td>
+              <td><span style="color:var(--dim);font-size:12px">—</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ─── PROFILE ─── -->
+    <div class="page animate" id="page-profile">
+      <div class="page-heading">
+        <h1>Mon profil 👤</h1>
+        <p>Gérez vos informations et préférences · Manage your info and preferences</p>
+      </div>
+      <div class="profile-layout">
+        <div>
+          <div class="profile-card" style="margin-bottom:14px">
+            <div class="profile-avatar" id="prof-avatar">JT</div>
+            <div class="profile-name" id="prof-name">Jean Tremblay</div>
+            <div class="profile-email" id="prof-email">jean@plomberietremblay.ca</div>
+            <div class="profile-tags">
+              <span class="ptag ptag-plan">Croissance</span>
+              <span class="ptag ptag-city">Châteauguay</span>
+              <span class="ptag ptag-city">Plomberie</span>
+            </div>
+            <div class="profile-stats">
+              <div class="pstat"><div class="pstat-val">3</div><div class="pstat-lbl">Mois client</div></div>
+              <div class="pstat"><div class="pstat-val">$1 791</div><div class="pstat-lbl">Total facturé</div></div>
+              <div class="pstat"><div class="pstat-val">34</div><div class="pstat-lbl">Appels ce mois</div></div>
+              <div class="pstat"><div class="pstat-val">4.8★</div><div class="pstat-lbl">Note Google</div></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="margin-bottom:16px">🔔 Notifications</div>
+            <div class="notif-row">
+              <div><div class="notif-label">Rapport mensuel</div><div class="notif-sub">Recevoir le rapport par email</div></div>
+              <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            </div>
+            <div class="notif-row">
+              <div><div class="notif-label">Nouveaux avis Google</div><div class="notif-sub">Alerte lors d'un nouvel avis</div></div>
+              <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            </div>
+            <div class="notif-row">
+              <div><div class="notif-label">Publications publiées</div><div class="notif-sub">Confirmation à chaque post</div></div>
+              <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            </div>
+            <div class="notif-row">
+              <div><div class="notif-label">Rappel de renouvellement</div><div class="notif-sub">7 jours avant la date</div></div>
+              <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            </div>
+          </div>
+        </div>
+        <div class="profile-form">
+          <div class="form-section-title">Informations de l'entreprise</div>
+          <div class="pf-row">
+            <div class="pf">
+              <label>Prénom · First name</label>
+              <input type="text" value="Jean" />
+            </div>
+            <div class="pf">
+              <label>Nom · Last name</label>
+              <input type="text" value="Tremblay" />
+            </div>
+          </div>
+          <div class="pf">
+            <label>Nom de l'entreprise</label>
+            <input type="text" value="Plomberie Tremblay inc." />
+          </div>
+          <div class="pf-row">
+            <div class="pf">
+              <label>Téléphone</label>
+              <input type="tel" value="514-555-0123" />
+            </div>
+            <div class="pf">
+              <label>Email</label>
+              <input type="email" value="jean@plomberietremblay.ca" />
+            </div>
+          </div>
+          <div class="pf-row">
+            <div class="pf">
+              <label>Ville</label>
+              <input type="text" value="Châteauguay" />
+            </div>
+            <div class="pf">
+              <label>Secteur</label>
+              <select>
+                <option selected>Plomberie</option>
+                <option>Restaurant</option>
+                <option>Salon / Spa</option>
+                <option>Agent immobilier</option>
+                <option>Clinique</option>
+              </select>
+            </div>
+          </div>
+          <button class="save-btn" onclick="showSaved(this)">Sauvegarder les modifications →</button>
+
+          <div style="margin-top:28px">
+            <div class="form-section-title">Sécurité · Security</div>
+            <div class="pf">
+              <label>Mot de passe actuel</label>
+              <input type="password" placeholder="••••••••" />
+            </div>
+            <div class="pf-row">
+              <div class="pf">
+                <label>Nouveau mot de passe</label>
+                <input type="password" placeholder="••••••••" />
+              </div>
+              <div class="pf">
+                <label>Confirmer</label>
+                <input type="password" placeholder="••••••••" />
+              </div>
+            </div>
+            <button class="save-btn" onclick="showSaved(this)">Changer le mot de passe →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── MESSAGES ─── -->
+    <div class="page animate" id="page-messages">
+      <div class="page-heading">
+        <h1>Messages 💬</h1>
+        <p>Communication avec votre équipe SOS Digital · Communication with your SOS Digital team</p>
+      </div>
+      <div class="card">
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="act-icon" style="background:var(--red-dim);font-size:18px">🍁</div>
+            <div style="flex:1">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                <div style="font-size:13px;font-weight:700">SOS Digital — Équipe</div>
+                <div style="font-size:11px;color:var(--dim)">Il y a 2 heures</div>
+              </div>
+              <div class="act-text">Bonjour Jean! Votre rapport de septembre est prêt. Ce mois a été excellent — +38% de vues Google et 34 appels reçus. Nous avons aussi commencé l'article de blogue SEO pour octobre. Avez-vous des questions?</div>
+              <div style="margin-top:8px">
+                <span style="background:var(--red-dim);border:1px solid var(--red-brd);border-radius:3px;padding:2px 8px;font-size:10px;color:var(--red2);font-weight:700">NOUVEAU</span>
+              </div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="act-icon" style="background:var(--red-dim);font-size:18px">🍁</div>
+            <div style="flex:1">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                <div style="font-size:13px;font-weight:700">SOS Digital — Équipe</div>
+                <div style="font-size:11px;color:var(--dim)">Il y a 3 jours</div>
+              </div>
+              <div class="act-text">Vos 16 publications de septembre ont été publiées sur Instagram et Facebook. La publication sur les "urgences plomberie nuit" a eu une portée de 480 personnes — votre meilleur résultat ce mois! Nous prévoyons une campagne similaire pour octobre.</div>
+              <div style="margin-top:8px">
+                <span style="background:var(--red-dim);border:1px solid var(--red-brd);border-radius:3px;padding:2px 8px;font-size:10px;color:var(--red2);font-weight:700">NOUVEAU</span>
+              </div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="act-icon" style="background:var(--red-dim);font-size:18px">🍁</div>
+            <div style="flex:1">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                <div style="font-size:13px;font-weight:700">SOS Digital — Équipe</div>
+                <div style="font-size:11px;color:var(--dim)">Il y a 10 jours</div>
+              </div>
+              <div class="act-text">Nous avons répondu à votre nouvel avis 5 étoiles sur Google en français et en anglais. Votre note moyenne est maintenant à 4.8★. Excellent travail de votre côté pour la satisfaction client!</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:18px;display:flex;gap:10px">
+          <input type="text" placeholder="Répondre à l'équipe SOS Digital..." style="flex:1;background:var(--ink3);border:1px solid var(--rule);border-radius:7px;padding:11px 14px;color:var(--txt);font-size:14px;font-family:var(--body);outline:none" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--rule)'" />
+          <button class="save-btn" onclick="this.previousElementSibling.value=''">Envoyer →</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /screen-portal -->
+
+<script>
+// ── DEMO ACCOUNTS ──
+const USERS = {
+  'client@demo.com': { pass: 'demo123', name: 'Jean Tremblay', initials: 'JT', plan: 'Croissance' },
+  'info@sosdigital.ca': { pass: 'admin123', name: 'Admin SOS', initials: 'AS', plan: 'Admin' },
+};
+
+// ── LOGIN ──
+function doLogin() {
+  const email = document.getElementById('login-email').value.trim().toLowerCase();
+  const pass  = document.getElementById('login-pass').value;
+  const err   = document.getElementById('login-err');
+  const user  = USERS[email];
+  if (!user || user.pass !== pass) {
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+  setUser(user);
+  document.getElementById('screen-login').classList.remove('active');
+  document.getElementById('screen-portal').classList.add('active');
+  document.getElementById('topbar-date').textContent = new Date().toLocaleDateString('fr-CA', { weekday:'short', day:'numeric', month:'long' });
+}
+
+function setUser(u) {
+  ['sb-avatar','tb-avatar','prof-avatar'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent=u.initials; });
+  ['sb-name'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent=u.name; });
+  const dn = document.getElementById('dash-name');
+  if(dn) dn.textContent = u.name.split(' ')[0];
+  const pn = document.getElementById('prof-name');
+  if(pn) pn.textContent = u.name;
+}
+
+// allow Enter key on login
+document.addEventListener('keydown', e => {
+  if(e.key === 'Enter' && document.getElementById('screen-login').classList.contains('active')) doLogin();
+});
+
+// ── LOGOUT ──
+function doLogout() {
+  document.getElementById('screen-portal').classList.remove('active');
+  document.getElementById('screen-login').classList.add('active');
+  document.getElementById('login-email').value = '';
+  document.getElementById('login-pass').value = '';
+}
+
+// ── PAGE NAVIGATION ──
+const PAGE_TITLES = {
+  dashboard:    'Tableau de bord',
+  performance:  'Performance',
+  subscription: 'Abonnement',
+  profile:      'Mon profil',
+  messages:     'Messages',
+};
+
+function showPage(id, navEl) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const pg = document.getElementById('page-'+id);
+  if(pg) { pg.classList.add('active'); void pg.offsetWidth; pg.style.animation='none'; pg.style.animation=''; }
+  if(navEl) navEl.classList.add('active');
+  document.getElementById('topbar-title').textContent = PAGE_TITLES[id] || id;
+}
+
+// ── SAVE FEEDBACK ──
+function showSaved(btn) {
+  const orig = btn.textContent;
+  btn.textContent = '✓ Sauvegardé!';
+  btn.style.background = 'var(--green)';
+  btn.style.color = '#000';
+  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; }, 2000);
+}
+</script>
+</body>
+</html>
